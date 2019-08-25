@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title></title>
+<meta name="author" content="(Aldric Giacomoni)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js-3.8.0/css/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js-3.8.0/css/theme/solarized.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = './reveal.js-3.8.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<section>
+<section id="slide-orgf95ddb1">
+<h2 id="orgf95ddb1">FOO</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org193d349">
+<h2 id="org193d349">Dwarlixir</h2>
+<div class="outline-text-2" id="text-org193d349">
+</div>
+</section>
+<section id="slide-org1399045">
+<h3 id="org1399045">c9f6725 Dwarves have X, Y coordinates and have a Registry (this is pre-Registry)</h3>
+</section>
+<section id="slide-org5fecbdf">
+<h3 id="org5fecbdf">48fc61e Dwarves use :timer.send_interval to send themselves a ping and move to new coordinates</h3>
+</section>
+<section id="slide-orga2cd7ca">
+<h3 id="orga2cd7ca">576e3f4 Create a "world" that knows if a location is taken by a dwarf</h3>
+</section>
+<section id="slide-org6e7b77e">
+<h3 id="org6e7b77e">0d2b2ed Faker, because names are important</h3>
+</section>
+<section id="slide-orga31801e">
+<h3 id="orga31801e">7b67cff use built-in Registry finally</h3>
+<ul>
+<li>got a world</li>
+<li>when spinning up a dwarf, ask the world process to store its location</li>
+<li>moving a dwarf is <code>World.move(dwarf)</code></li>
+
+</ul>
+</section>
+<section id="slide-org3f52ab9">
+<h3 id="org3f52ab9">80e2ba8 pause the game!</h3>
+<ul>
+<li>more registries can't hurt, right?</li>
+<li>The time registry now has a heartbeat which Ι could stop -- it sends every creature a message telling it to do its thing.</li>
+<li>I have timers! They hold heartbeats! They can be stopped! Wait, that sounds murderous.</li>
+
+</ul>
+</section>
+<section id="slide-orgca5fc78">
+<h3 id="orgca5fc78">0a823a6 Use ets for locations (because that's cool, right?)</h3>
+<ul>
+<li>oh god what's with those matchspecs</li>
+<li>ex2ms? oh good Ι don't have to figure too much out</li>
+
+</ul>
+</section>
+<section id="slide-org581c2f4">
+<h3 id="org581c2f4">ad91c0c dwarves can die</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">c9f6725</td>
+<td class="org-left">We have dwarves!</td>
+</tr>
+
+<tr>
+<td class="org-left">eb71612</td>
+<td class="org-left">Dwarves walk around an endless plain</td>
+</tr>
+
+<tr>
+<td class="org-left">48fc61e</td>
+<td class="org-left">Dwarves walk again</td>
+</tr>
+
+<tr>
+<td class="org-left">576e3f4</td>
+<td class="org-left">In a world, sometimes you can't move</td>
+</tr>
+
+<tr>
+<td class="org-left">0d2b2ed</td>
+<td class="org-left">Using faker for names</td>
+</tr>
+
+<tr>
+<td class="org-left">bfdb468</td>
+<td class="org-left">merp</td>
+</tr>
+
+<tr>
+<td class="org-left">7b67cff</td>
+<td class="org-left">Use Registry</td>
+</tr>
+
+<tr>
+<td class="org-left">f4382fc</td>
+<td class="org-left">Logging is back, yay</td>
+</tr>
+
+<tr>
+<td class="org-left">80e2ba8</td>
+<td class="org-left">I can pause the game</td>
+</tr>
+
+<tr>
+<td class="org-left">0a823a6</td>
+<td class="org-left">use ets for locations</td>
+</tr>
+
+<tr>
+<td class="org-left">ad91c0c</td>
+<td class="org-left">Dwarves can die</td>
+</tr>
+
+<tr>
+<td class="org-left">f447f85</td>
+<td class="org-left">nyaaargg</td>
+</tr>
+
+<tr>
+<td class="org-left">ad7469b</td>
+<td class="org-left">an umbrella app might be cleaner</td>
+</tr>
+
+<tr>
+<td class="org-left">11e90b6</td>
+<td class="org-left">the baby version of locations and pathways</td>
+</tr>
+
+<tr>
+<td class="org-left">317c908</td>
+<td class="org-left">location spawns pathways</td>
+</tr>
+
+<tr>
+<td class="org-left">69a2079</td>
+<td class="org-left">Registries everywhere! aaarrghh</td>
+</tr>
+
+<tr>
+<td class="org-left">4f57f53</td>
+<td class="org-left">beginning to use via tuples</td>
+</tr>
+
+<tr>
+<td class="org-left">e0431ac</td>
+<td class="org-left">linking relevant pathways and locations</td>
+</tr>
+
+<tr>
+<td class="org-left">12ad608</td>
+<td class="org-left">Tick works, moving works</td>
+</tr>
+
+<tr>
+<td class="org-left">e3da5a6</td>
+<td class="org-left">remove obsolete files</td>
+</tr>
+
+<tr>
+<td class="org-left">ec5d258</td>
+<td class="org-left">very rudimentary controller implemented</td>
+</tr>
+
+<tr>
+<td class="org-left">deb19d0</td>
+<td class="org-left">Create a generic mob controller</td>
+</tr>
+
+<tr>
+<td class="org-left">02b1b9f</td>
+<td class="org-left">merp</td>
+</tr>
+
+<tr>
+<td class="org-left">995202a</td>
+<td class="org-left">Preparing for mating</td>
+</tr>
+
+<tr>
+<td class="org-left">aeff220</td>
+<td class="org-left">They breed like rabbits</td>
+</tr>
+
+<tr>
+<td class="org-left">1eee6dd</td>
+<td class="org-left">Create a corpse item</td>
+</tr>
+
+<tr>
+<td class="org-left">6222d17</td>
+<td class="org-left">dwarves really die now</td>
+</tr>
+
+<tr>
+<td class="org-left">d40485d</td>
+<td class="org-left">Remove a bunch of stdout</td>
+</tr>
+
+<tr>
+<td class="org-left">fce025c</td>
+<td class="org-left">if no possible partner, don't crash</td>
+</tr>
+
+<tr>
+<td class="org-left">038b4e3</td>
+<td class="org-left">moar dwarves!</td>
+</tr>
+
+<tr>
+<td class="org-left">90343d4</td>
+<td class="org-left">god tick, I guess</td>
+</tr>
+
+<tr>
+<td class="org-left">684e9ec</td>
+<td class="org-left">Update README.md</td>
+</tr>
+
+<tr>
+<td class="org-left">8af9edc</td>
+<td class="org-left">very rudimentary tcp echo server</td>
+</tr>
+
+<tr>
+<td class="org-left">e3315da</td>
+<td class="org-left">add credo to dwarves app</td>
+</tr>
+
+<tr>
+<td class="org-left">07c0ef2</td>
+<td class="org-left">Rename dwarves app to mobs app</td>
+</tr>
+
+<tr>
+<td class="org-left">db02173</td>
+<td class="org-left">almost have human controller receiving messages</td>
+</tr>
+
+<tr>
+<td class="org-left">9bb4c6b</td>
+<td class="org-left">some message passing is happening...</td>
+</tr>
+
+<tr>
+<td class="org-left">7be4110</td>
+<td class="org-left">more reasonable</td>
+</tr>
+
+<tr>
+<td class="org-left">dd8a036</td>
+<td class="org-left">troubleshooting without tests</td>
+</tr>
+
+<tr>
+<td class="org-left">3995153</td>
+<td class="org-left">well there's messages</td>
+</tr>
+
+<tr>
+<td class="org-left">92588b8</td>
+<td class="org-left">slightly cleaner message passing</td>
+</tr>
+
+<tr>
+<td class="org-left">321805c</td>
+<td class="org-left">a dwarf is replaced by a corpse and a user can look</td>
+</tr>
+
+<tr>
+<td class="org-left">edeab5f</td>
+<td class="org-left">controller dies with mob</td>
+</tr>
+
+<tr>
+<td class="org-left">aad9c9e</td>
+<td class="org-left">More locations</td>
+</tr>
+
+<tr>
+<td class="org-left">248839d</td>
+<td class="org-left">"quit" command</td>
+</tr>
+
+<tr>
+<td class="org-left">a086046</td>
+<td class="org-left">kill human controller on quit</td>
+</tr>
+
+<tr>
+<td class="org-left">f98a561</td>
+<td class="org-left">integration test for telnet?</td>
+</tr>
+
+<tr>
+<td class="org-left">1cac461</td>
+<td class="org-left">Update README.md</td>
+</tr>
+
+<tr>
+<td class="org-left">80c00dd</td>
+<td class="org-left">prepare mobs for testability</td>
+</tr>
+
+<tr>
+<td class="org-left">6cf5217</td>
+<td class="org-left">beginning testing for mating</td>
+</tr>
+
+<tr>
+<td class="org-left">6f4f1ba</td>
+<td class="org-left">GERONIMO</td>
+</tr>
+
+<tr>
+<td class="org-left">b1cfe5b</td>
+<td class="org-left">now the test fails because the design is bad</td>
+</tr>
+
+<tr>
+<td class="org-left">0a29abd</td>
+<td class="org-left">elixir works when it's written well</td>
+</tr>
+
+<tr>
+<td class="org-left">d611716</td>
+<td class="org-left">add travis.yml</td>
+</tr>
+
+<tr>
+<td class="org-left">b610254</td>
+<td class="org-left">add a quickstart to readme</td>
+</tr>
+
+<tr>
+<td class="org-left">a95ec74</td>
+<td class="org-left">Add a build radiator</td>
+</tr>
+
+<tr>
+<td class="org-left">826de2c</td>
+<td class="org-left">reproduction in its own module</td>
+</tr>
+
+<tr>
+<td class="org-left">028ba3a</td>
+<td class="org-left">Merge branch 'master' of github.com:Trevoke/dwarlixir</td>
+</tr>
+
+<tr>
+<td class="org-left">a019860</td>
+<td class="org-left">More builds, builds everywhere</td>
+</tr>
+
+<tr>
+<td class="org-left">794bd62</td>
+<td class="org-left">new test formatter</td>
+</tr>
+
+<tr>
+<td class="org-left">7682a9f</td>
+<td class="org-left">Merge branch 'master' of github.com:Trevoke/dwarlixir</td>
+</tr>
+
+<tr>
+<td class="org-left">36c6c43</td>
+<td class="org-left">a third test for dying things</td>
+</tr>
+
+<tr>
+<td class="org-left">c1deecf</td>
+<td class="org-left">link to test in readme</td>
+</tr>
+
+<tr>
+<td class="org-left">28b53cb</td>
+<td class="org-left">Exits are displayed in green</td>
+</tr>
+
+<tr>
+<td class="org-left">4b5d655</td>
+<td class="org-left">one tiny pesky bug..</td>
+</tr>
+
+<tr>
+<td class="org-left">b2d7f1c</td>
+<td class="org-left">Right. Fix the test too.</td>
+</tr>
+
+<tr>
+<td class="org-left">a9dedc1</td>
+<td class="org-left">locs and mobs get out of sync :(</td>
+</tr>
+
+<tr>
+<td class="org-left">1911f7f</td>
+<td class="org-left">extract currently common mob functionality</td>
+</tr>
+
+<tr>
+<td class="org-left">e0ccac8</td>
+<td class="org-left">I think Ι need a proper two-phase commit</td>
+</tr>
+
+<tr>
+<td class="org-left">7d0c748</td>
+<td class="org-left">I see when mobs leave and arrive</td>
+</tr>
+
+<tr>
+<td class="org-left">2d54d24</td>
+<td class="org-left">remove some commented code</td>
+</tr>
+
+<tr>
+<td class="org-left">9b2b309</td>
+<td class="org-left">unregister corpse when it poofs away</td>
+</tr>
+
+<tr>
+<td class="org-left">2b16c5a</td>
+<td class="org-left">maybe a mob just wants to stay where it is</td>
+</tr>
+
+<tr>
+<td class="org-left">5e7afcd</td>
+<td class="org-left">Randomly generated graph and World.overview admin command</td>
+</tr>
+
+<tr>
+<td class="org-left">adc0adf</td>
+<td class="org-left">can't move yet but.. more commands .. And a welcome prompt of sorts</td>
+</tr>
+
+<tr>
+<td class="org-left">f3857e8</td>
+<td class="org-left">The cost of UX, man. The cost of UX.</td>
+</tr>
+
+<tr>
+<td class="org-left">a020923</td>
+<td class="org-left">unregister a human controller on quit</td>
+</tr>
+
+<tr>
+<td class="org-left">a821292</td>
+<td class="org-left">oh that might not be needed</td>
+</tr>
+
+<tr>
+<td class="org-left">4511e92</td>
+<td class="org-left">human movement works</td>
+</tr>
+
+<tr>
+<td class="org-left">8fb8229</td>
+<td class="org-left">just give the mobs the exits, too</td>
+</tr>
+
+<tr>
+<td class="org-left">40abfa3</td>
+<td class="org-left">bunch of new commands</td>
+</tr>
+
+<tr>
+<td class="org-left">fecd9c4</td>
+<td class="org-left">a small tweak to algo yields perf boost</td>
+</tr>
+
+<tr>
+<td class="org-left">e4600ed</td>
+<td class="org-left">fix defect where people couldn't move</td>
+</tr>
+
+<tr>
+<td class="org-left">bc85fe1</td>
+<td class="org-left">hopefully fix defect for colorless tables</td>
+</tr>
+
+<tr>
+<td class="org-left">fd7838a</td>
+<td class="org-left">do not want a big random world right now</td>
+</tr>
+
+<tr>
+<td class="org-left">0a03d3d</td>
+<td class="org-left">update mix.lock</td>
+</tr>
+
+<tr>
+<td class="org-left">ca06ba5</td>
+<td class="org-left">remove code in pathway for movement</td>
+</tr>
+
+<tr>
+<td class="org-left">f376d8f</td>
+<td class="org-left">better name</td>
+</tr>
+
+<tr>
+<td class="org-left">e1b1c2b</td>
+<td class="org-left">arguably improved design</td>
+</tr>
+
+<tr>
+<td class="org-left">7e27f8d</td>
+<td class="org-left">add distillery</td>
+</tr>
+
+<tr>
+<td class="org-left">9479d44</td>
+<td class="org-left">I bow to the genserver gods</td>
+</tr>
+
+<tr>
+<td class="org-left">fb6acf6</td>
+<td class="org-left">foo</td>
+</tr>
+
+<tr>
+<td class="org-left">44d5c6d</td>
+<td class="org-left">0.1.0 releasing test</td>
+</tr>
+
+<tr>
+<td class="org-left">b2d6b36</td>
+<td class="org-left">0.1.1 fixing warnings, release test two</td>
+</tr>
+
+<tr>
+<td class="org-left">69b490d</td>
+<td class="org-left">green build</td>
+</tr>
+
+<tr>
+<td class="org-left">6844c44</td>
+<td class="org-left">commented out metaprog code</td>
+</tr>
+
+<tr>
+<td class="org-left">48780ba</td>
+<td class="org-left">mark log level as info mobs default config</td>
+</tr>
+
+<tr>
+<td class="org-left">306b7d5</td>
+<td class="org-left">0.1.2 artificial population cap per room</td>
+</tr>
+
+<tr>
+<td class="org-left">3a640a8</td>
+<td class="org-left">Okay, fifteen mobs is enough thanks</td>
+</tr>
+
+<tr>
+<td class="org-left">f861f30</td>
+<td class="org-left">better departure message for humans.</td>
+</tr>
+
+<tr>
+<td class="org-left">e34d2fc</td>
+<td class="org-left">add a todo. best commit ever.</td>
+</tr>
+
+<tr>
+<td class="org-left">1bbd855</td>
+<td class="org-left">if a location dies, it respawns no matter what</td>
+</tr>
+
+<tr>
+<td class="org-left">6961c4b</td>
+<td class="org-left">Use OTP process termination when a mob dies</td>
+</tr>
+
+<tr>
+<td class="org-left">8f696c3</td>
+<td class="org-left">This is probably how locs should die</td>
+</tr>
+
+<tr>
+<td class="org-left">a5dd705</td>
+<td class="org-left">better if tests pass with no errors</td>
+</tr>
+
+<tr>
+<td class="org-left">ed8e590</td>
+<td class="org-left">0.1.7 0.1.6 back to a mob spawning supervisor</td>
+</tr>
+
+<tr>
+<td class="org-left">18dcbf7</td>
+<td class="org-left">update distillery</td>
+</tr>
+
+<tr>
+<td class="org-left">2e7e710</td>
+<td class="org-left">have Elixir's logger send its log to files</td>
+</tr>
+
+<tr>
+<td class="org-left">4cb8d0d</td>
+<td class="org-left">move file-logging to umbrella level</td>
+</tr>
+
+<tr>
+<td class="org-left">92a3aee</td>
+<td class="org-left">enable sasl binary logs</td>
+</tr>
+
+<tr>
+<td class="org-left">a8c684d</td>
+<td class="org-left">add empty ecosystem app</td>
+</tr>
+
+<tr>
+<td class="org-left">87cb478</td>
+<td class="org-left">begin genevent</td>
+</tr>
+
+<tr>
+<td class="org-left">ac8e5a9</td>
+<td class="org-left">0.2.0 there's an ecosystem in the house</td>
+</tr>
+
+<tr>
+<td class="org-left">c9f5130</td>
+<td class="org-left">0.2.1 fix some compilation errors because I have no tests</td>
+</tr>
+
+<tr>
+<td class="org-left">1f1c8bc</td>
+<td class="org-left">0.2.2 attempt to move logger file backend up the tree</td>
+</tr>
+
+<tr>
+<td class="org-left">e222928</td>
+<td class="org-left">Slight rewrite of random map generator</td>
+</tr>
+
+<tr>
+<td class="org-left">a0b73b6</td>
+<td class="org-left">ignore log files</td>
+</tr>
+
+<tr>
+<td class="org-left">a4f503c</td>
+<td class="org-left">tests please</td>
+</tr>
+
+<tr>
+<td class="org-left">68268b0</td>
+<td class="org-left">maybe this will make the logs all go to the one directory</td>
+</tr>
+
+<tr>
+<td class="org-left">454e39d</td>
+<td class="org-left">0.2.3 maybe now color will work</td>
+</tr>
+
+<tr>
+<td class="org-left">aec5750</td>
+<td class="org-left">0.3.0 not promising anything but maybe 100 ticks to birth</td>
+</tr>
+
+<tr>
+<td class="org-left">dad4124</td>
+<td class="org-left">keep tests green</td>
+</tr>
+
+<tr>
+<td class="org-left">479cc41</td>
+<td class="org-left">0.4.0 buncha sync stuff is time-bound now</td>
+</tr>
+
+<tr>
+<td class="org-left">44964e7</td>
+<td class="org-left">unregister from registry last + refer to "items" in loc</td>
+</tr>
+
+<tr>
+<td class="org-left">c795f13</td>
+<td class="org-left">add test to make sure location respawns after death</td>
+</tr>
+
+<tr>
+<td class="org-left">807efa6</td>
+<td class="org-left">yay failing tests</td>
+</tr>
+
+<tr>
+<td class="org-left">c842b7d</td>
+<td class="org-left">well, tests pass</td>
+</tr>
+
+<tr>
+<td class="org-left">f5d1a8f</td>
+<td class="org-left">sexual reproduction: pregnant female doesn't mate</td>
+</tr>
+
+<tr>
+<td class="org-left">07a5b2e</td>
+<td class="org-left">bird lays egg (flickers)</td>
+</tr>
+
+<tr>
+<td class="org-left">8c360c5</td>
+<td class="org-left">prepare for code duplication removal</td>
+</tr>
+
+<tr>
+<td class="org-left">f0536c3</td>
+<td class="org-left">better macro</td>
+</tr>
+
+<tr>
+<td class="org-left">ac94b12</td>
+<td class="org-left">more todo documentation</td>
+</tr>
+
+<tr>
+<td class="org-left">8ae78c8</td>
+<td class="org-left">more thoughts on macro</td>
+</tr>
+
+<tr>
+<td class="org-left">fd2b2c7</td>
+<td class="org-left">queues messages, nothing spawns</td>
+</tr>
+
+<tr>
+<td class="org-left">ae1a550</td>
+<td class="org-left">allow births again, oops</td>
+</tr>
+
+<tr>
+<td class="org-left">a1f2926</td>
+<td class="org-left">mob state in an agent</td>
+</tr>
+
+<tr>
+<td class="org-left">d1f6671</td>
+<td class="org-left">0.4.2 0.4.1 er, will this ship?</td>
+</tr>
+
+<tr>
+<td class="org-left">063df76</td>
+<td class="org-left">fix compilation warnings</td>
+</tr>
+
+<tr>
+<td class="org-left">801bbcd</td>
+<td class="org-left">set tool versions</td>
+</tr>
+
+<tr>
+<td class="org-left">e8d203a</td>
+<td class="org-left">make it work with Elixir 1.5</td>
+</tr>
+
+<tr>
+<td class="org-left">ca3a51f</td>
+<td class="org-left">Update README.md</td>
+</tr>
+
+<tr>
+<td class="org-left">46cb47e</td>
+<td class="org-left">add rel/config file</td>
+</tr>
+
+<tr>
+<td class="org-left">99e369c</td>
+<td class="org-left">can save a generated world</td>
+</tr>
+
+<tr>
+<td class="org-left">39b27c8</td>
+<td class="org-left">update distillery</td>
+</tr>
+
+<tr>
+<td class="org-left">d9500cb</td>
+<td class="org-left">update dependencies</td>
+</tr>
+
+<tr>
+<td class="org-left">cf614f6</td>
+<td class="org-left">get rid of doc formatter library</td>
+</tr>
+
+<tr>
+<td class="org-left">2069aa5</td>
+<td class="org-left">elixir 1.5.2, erlang 20.1</td>
+</tr>
+
+<tr>
+<td class="org-left">cca1930</td>
+<td class="org-left">Add MIT License</td>
+</tr>
+
+<tr>
+<td class="org-left">69d4d0d</td>
+<td class="org-left">un-umbrella-appify</td>
+</tr>
+
+<tr>
+<td class="org-left">20a1b5a</td>
+<td class="org-left">begin switching to ecstatic</td>
+</tr>
+
+<tr>
+<td class="org-left">4d356f6</td>
+<td class="org-left">fix compilation errors</td>
+</tr>
+
+<tr>
+<td class="org-left">8138197</td>
+<td class="org-left">plugs in pretty well to Ecstatic</td>
+</tr>
+
+<tr>
+<td class="org-left">2ae7c00</td>
+<td class="org-left">watchers look like watchers</td>
+</tr>
+
+<tr>
+<td class="org-left">3715a6a</td>
+<td class="org-left">components use module attributes</td>
+</tr>
+
+<tr>
+<td class="org-left">585ddc0</td>
+<td class="org-left">tick properly for aging</td>
+</tr>
+
+<tr>
+<td class="org-left">99b9b9b</td>
+<td class="org-left">move entities where they may belong</td>
+</tr>
+
+<tr>
+<td class="org-left">5299463</td>
+<td class="org-left">update for elixir 1.8</td>
+</tr>
+
+<tr>
+<td class="org-left">51792c3</td>
+<td class="org-left">ranch + clean up supervision tree</td>
+</tr>
+
+<tr>
+<td class="org-left">e0a7ae3</td>
+<td class="org-left">master origin/master okay, this is an echo server with a timeout</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js-3.8.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: './reveal.js-3.8.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: './reveal.js-3.8.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: './reveal.js-3.8.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: './reveal.js-3.8.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: './reveal.js-3.8.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>

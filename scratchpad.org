@@ -1,3 +1,9 @@
+#+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t reveal_title_slide:nil
+#+REVEAL_THEME: solarized
+#+REVEAL_ROOT: ./reveal.js-3.8.0
+
+* FOO
+
 * Dwarlixir
 ** c9f6725 Dwarves have X, Y coordinates and have a Registry (this is pre-Registry)
 ** 48fc61e Dwarves use :timer.send_interval to send themselves a ping and move to new coordinates
