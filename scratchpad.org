@@ -1,0 +1,176 @@
+* Dwarlixir
+** c9f6725 Dwarves have X, Y coordinates and have a Registry (this is pre-Registry)
+** 48fc61e Dwarves use :timer.send_interval to send themselves a ping and move to new coordinates
+** 576e3f4 Create a "world" that knows if a location is taken by a dwarf
+** 0d2b2ed Faker, because names are important
+** 7b67cff use built-in Registry finally
+- got a world
+- when spinning up a dwarf, ask the world process to store its location
+- moving a dwarf is ~World.move(dwarf)~
+** 80e2ba8 pause the game!
+- more registries can't hurt, right?
+- The time registry now has a heartbeat which Ι could stop -- it sends every creature a message telling it to do its thing.
+- I have timers! They hold heartbeats! They can be stopped! Wait, that sounds murderous.
+** 0a823a6 Use ets for locations (because that's cool, right?)
+- oh god what's with those matchspecs
+- ex2ms? oh good Ι don't have to figure too much out
+** ad91c0c dwarves can die
+| c9f6725 | We have dwarves!                                                    |
+| eb71612 | Dwarves walk around an endless plain                                |
+| 48fc61e | Dwarves walk again                                                  |
+| 576e3f4 | In a world, sometimes you can't move                                |
+| 0d2b2ed | Using faker for names                                               |
+| bfdb468 | merp                                                                |
+| 7b67cff | Use Registry                                                        |
+| f4382fc | Logging is back, yay                                                |
+| 80e2ba8 | I can pause the game                                                |
+| 0a823a6 | use ets for locations                                               |
+| ad91c0c | Dwarves can die                                                     |
+| f447f85 | nyaaargg                                                            |
+| ad7469b | an umbrella app might be cleaner                                    |
+| 11e90b6 | the baby version of locations and pathways                          |
+| 317c908 | location spawns pathways                                            |
+| 69a2079 | Registries everywhere! aaarrghh                                     |
+| 4f57f53 | beginning to use via tuples                                         |
+| e0431ac | linking relevant pathways and locations                             |
+| 12ad608 | Tick works, moving works                                            |
+| e3da5a6 | remove obsolete files                                               |
+| ec5d258 | very rudimentary controller implemented                             |
+| deb19d0 | Create a generic mob controller                                     |
+| 02b1b9f | merp                                                                |
+| 995202a | Preparing for mating                                                |
+| aeff220 | They breed like rabbits                                             |
+| 1eee6dd | Create a corpse item                                                |
+| 6222d17 | dwarves really die now                                              |
+| d40485d | Remove a bunch of stdout                                            |
+| fce025c | if no possible partner, don't crash                                 |
+| 038b4e3 | moar dwarves!                                                       |
+| 90343d4 | god tick, I guess                                                   |
+| 684e9ec | Update README.md                                                    |
+| 8af9edc | very rudimentary tcp echo server                                    |
+| e3315da | add credo to dwarves app                                            |
+| 07c0ef2 | Rename dwarves app to mobs app                                      |
+| db02173 | almost have human controller receiving messages                     |
+| 9bb4c6b | some message passing is happening...                                |
+| 7be4110 | more reasonable                                                     |
+| dd8a036 | troubleshooting without tests                                       |
+| 3995153 | well there's messages                                               |
+| 92588b8 | slightly cleaner message passing                                    |
+| 321805c | a dwarf is replaced by a corpse and a user can look                 |
+| edeab5f | controller dies with mob                                            |
+| aad9c9e | More locations                                                      |
+| 248839d | "quit" command                                                      |
+| a086046 | kill human controller on quit                                       |
+| f98a561 | integration test for telnet?                                        |
+| 1cac461 | Update README.md                                                    |
+| 80c00dd | prepare mobs for testability                                        |
+| 6cf5217 | beginning testing for mating                                        |
+| 6f4f1ba | GERONIMO                                                            |
+| b1cfe5b | now the test fails because the design is bad                        |
+| 0a29abd | elixir works when it's written well                                 |
+| d611716 | add travis.yml                                                      |
+| b610254 | add a quickstart to readme                                          |
+| a95ec74 | Add a build radiator                                                |
+| 826de2c | reproduction in its own module                                      |
+| 028ba3a | Merge branch 'master' of github.com:Trevoke/dwarlixir               |
+| a019860 | More builds, builds everywhere                                      |
+| 794bd62 | new test formatter                                                  |
+| 7682a9f | Merge branch 'master' of github.com:Trevoke/dwarlixir               |
+| 36c6c43 | a third test for dying things                                       |
+| c1deecf | link to test in readme                                              |
+| 28b53cb | Exits are displayed in green                                        |
+| 4b5d655 | one tiny pesky bug..                                                |
+| b2d7f1c | Right. Fix the test too.                                            |
+| a9dedc1 | locs and mobs get out of sync :(                                    |
+| 1911f7f | extract currently common mob functionality                          |
+| e0ccac8 | I think Ι need a proper two-phase commit                            |
+| 7d0c748 | I see when mobs leave and arrive                                    |
+| 2d54d24 | remove some commented code                                          |
+| 9b2b309 | unregister corpse when it poofs away                                |
+| 2b16c5a | maybe a mob just wants to stay where it is                          |
+| 5e7afcd | Randomly generated graph and World.overview admin command           |
+| adc0adf | can't move yet but.. more commands .. And a welcome prompt of sorts |
+| f3857e8 | The cost of UX, man. The cost of UX.                                |
+| a020923 | unregister a human controller on quit                               |
+| a821292 | oh that might not be needed                                         |
+| 4511e92 | human movement works                                                |
+| 8fb8229 | just give the mobs the exits, too                                   |
+| 40abfa3 | bunch of new commands                                               |
+| fecd9c4 | a small tweak to algo yields perf boost                             |
+| e4600ed | fix defect where people couldn't move                               |
+| bc85fe1 | hopefully fix defect for colorless tables                           |
+| fd7838a | do not want a big random world right now                            |
+| 0a03d3d | update mix.lock                                                     |
+| ca06ba5 | remove code in pathway for movement                                 |
+| f376d8f | better name                                                         |
+| e1b1c2b | arguably improved design                                            |
+| 7e27f8d | add distillery                                                      |
+| 9479d44 | I bow to the genserver gods                                         |
+| fb6acf6 | foo                                                                 |
+| 44d5c6d | 0.1.0 releasing test                                                |
+| b2d6b36 | 0.1.1 fixing warnings, release test two                             |
+| 69b490d | green build                                                         |
+| 6844c44 | commented out metaprog code                                         |
+| 48780ba | mark log level as info mobs default config                          |
+| 306b7d5 | 0.1.2 artificial population cap per room                            |
+| 3a640a8 | Okay, fifteen mobs is enough thanks                                 |
+| f861f30 | better departure message for humans.                                |
+| e34d2fc | add a todo. best commit ever.                                       |
+| 1bbd855 | if a location dies, it respawns no matter what                      |
+| 6961c4b | Use OTP process termination when a mob dies                         |
+| 8f696c3 | This is probably how locs should die                                |
+| a5dd705 | better if tests pass with no errors                                 |
+| ed8e590 | 0.1.7 0.1.6 back to a mob spawning supervisor                       |
+| 18dcbf7 | update distillery                                                   |
+| 2e7e710 | have Elixir's logger send its log to files                          |
+| 4cb8d0d | move file-logging to umbrella level                                 |
+| 92a3aee | enable sasl binary logs                                             |
+| a8c684d | add empty ecosystem app                                             |
+| 87cb478 | begin genevent                                                      |
+| ac8e5a9 | 0.2.0 there's an ecosystem in the house                             |
+| c9f5130 | 0.2.1 fix some compilation errors because I have no tests           |
+| 1f1c8bc | 0.2.2 attempt to move logger file backend up the tree               |
+| e222928 | Slight rewrite of random map generator                              |
+| a0b73b6 | ignore log files                                                    |
+| a4f503c | tests please                                                        |
+| 68268b0 | maybe this will make the logs all go to the one directory           |
+| 454e39d | 0.2.3 maybe now color will work                                     |
+| aec5750 | 0.3.0 not promising anything but maybe 100 ticks to birth           |
+| dad4124 | keep tests green                                                    |
+| 479cc41 | 0.4.0 buncha sync stuff is time-bound now                           |
+| 44964e7 | unregister from registry last + refer to "items" in loc             |
+| c795f13 | add test to make sure location respawns after death                 |
+| 807efa6 | yay failing tests                                                   |
+| c842b7d | well, tests pass                                                    |
+| f5d1a8f | sexual reproduction: pregnant female doesn't mate                   |
+| 07a5b2e | bird lays egg (flickers)                                            |
+| 8c360c5 | prepare for code duplication removal                                |
+| f0536c3 | better macro                                                        |
+| ac94b12 | more todo documentation                                             |
+| 8ae78c8 | more thoughts on macro                                              |
+| fd2b2c7 | queues messages, nothing spawns                                     |
+| ae1a550 | allow births again, oops                                            |
+| a1f2926 | mob state in an agent                                               |
+| d1f6671 | 0.4.2 0.4.1 er, will this ship?                                     |
+| 063df76 | fix compilation warnings                                            |
+| 801bbcd | set tool versions                                                   |
+| e8d203a | make it work with Elixir 1.5                                        |
+| ca3a51f | Update README.md                                                    |
+| 46cb47e | add rel/config file                                                 |
+| 99e369c | can save a generated world                                          |
+| 39b27c8 | update distillery                                                   |
+| d9500cb | update dependencies                                                 |
+| cf614f6 | get rid of doc formatter library                                    |
+| 2069aa5 | elixir 1.5.2, erlang 20.1                                           |
+| cca1930 | Add MIT License                                                     |
+| 69d4d0d | un-umbrella-appify                                                  |
+| 20a1b5a | begin switching to ecstatic                                         |
+| 4d356f6 | fix compilation errors                                              |
+| 8138197 | plugs in pretty well to Ecstatic                                    |
+| 2ae7c00 | watchers look like watchers                                         |
+| 3715a6a | components use module attributes                                    |
+| 585ddc0 | tick properly for aging                                             |
+| 99b9b9b | move entities where they may belong                                 |
+| 5299463 | update for elixir 1.8                                               |
+| 51792c3 | ranch + clean up supervision tree                                   |
+| e0a7ae3 | master origin/master okay, this is an echo server with a timeout    |
