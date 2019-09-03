@@ -5,46 +5,66 @@
 * FOO
 
 * Dwarlixir
-** c9f6725 Dwarves have X, Y coordinates and have a Registry (this is pre-Registry)
-** 48fc61e Dwarves use :timer.send_interval to send themselves a ping and move to new coordinates
-** 576e3f4 Create a "world" that knows if a location is taken by a dwarf
-** 0d2b2ed Faker, because names are important
-** 7b67cff use built-in Registry finally
+
+** Brief intro
+- did NOΤ understand how to think in Erlang/Elixir
+- all about mistakes
+** What's a MUD
+
+** Erlmud
+https://gitlab.com/zxq9/erlmud/
+** What's Dwarf Fortress
+** game of life-style
+*** | c9f6725 | Dwarves have X, Y coordinates and have a Registry (this is pre-Registry)
+** decentralized / many ticks
+*** | 48fc61e | Dwarves use :timer.send_interval to send themselves a ping and move to new coordinates
+** a world map
+*** | 576e3f4 | Create a "world" that knows if a location is taken by a dwarf
+*** | 0d2b2ed | Faker, because names are important
+*** | 7b67cff | use built-in Registry finally
 - got a world
 - when spinning up a dwarf, ask the world process to store its location
 - moving a dwarf is ~World.move(dwarf)~
-** 80e2ba8 pause the game!
+** pausing the game
+*** | 80e2ba8 | pause the game!
 - more registries can't hurt, right?
 - The time registry now has a heartbeat which Ι could stop -- it sends every creature a message telling it to do its thing.
 - I have timers! They hold heartbeats! They can be stopped! Wait, that sounds murderous.
-** 0a823a6 Use ets for locations (because that's cool, right?)
+** ets sounds cool
+*** | 0a823a6 | Use ets for locations (because that's cool, right?)
 - oh god what's with those matchspecs
 - ex2ms? oh good Ι don't have to figure too much out
-** ad91c0c dwarves can die
-| c9f6725 | We have dwarves!                                                    |
-| eb71612 | Dwarves walk around an endless plain                                |
-| 48fc61e | Dwarves walk again                                                  |
-| 576e3f4 | In a world, sometimes you can't move                                |
-| 0d2b2ed | Using faker for names                                               |
-| bfdb468 | merp                                                                |
-| 7b67cff | Use Registry                                                        |
-| f4382fc | Logging is back, yay                                                |
-| 80e2ba8 | I can pause the game                                                |
-| 0a823a6 | use ets for locations                                               |
-| ad91c0c | Dwarves can die                                                     |
-| f447f85 | nyaaargg                                                            |
-| ad7469b | an umbrella app might be cleaner                                    |
-| 11e90b6 | the baby version of locations and pathways                          |
-| 317c908 | location spawns pathways                                            |
-| 69a2079 | Registries everywhere! aaarrghh                                     |
-| 4f57f53 | beginning to use via tuples                                         |
-| e0431ac | linking relevant pathways and locations                             |
-| 12ad608 | Tick works, moving works                                            |
-| e3da5a6 | remove obsolete files                                               |
-| ec5d258 | very rudimentary controller implemented                             |
-| deb19d0 | Create a generic mob controller                                     |
-| 02b1b9f | merp                                                                |
-| 995202a | Preparing for mating                                                |
+** dwarves can die
+*** | ad91c0c | dwarves can die
+** deadlock! uncontrolled synchronous calls
+*** | f447f85 | nyaaargg
+Looking for mates of the other sex through "world neighbors", synchronous calls to dwarves
+DEADLOCKS!
+** Read erlmud
+*** | 11e90b6 | the baby version of locations and pathways
+Okay Ι get it, async is better
+*** | 317c908 | location spawns pathways
+*** | 69a2079 | Registries everywhere! aaarrghh
+Well, LocationRegistry and PathwayRegistry
+** Back to "the game works?"
+*** | 12ad608 | Tick works, moving works
+Dwarves get a tick sent to them and they do stuff
+... I also introduce an API in World.Location
+*** | ec5d258 | very rudimentary controller implemented
+Beginning of separation of business logic from, er ... framework logic?
+*** | deb19d0 | Create a generic mob controller
+Oh, a "human" controller with output and a mob controller with "AI"
+** Okay, back to reproduction
+*** | 995202a | Preparing for mating
+only 10% chance to flirt, should help, right?
+Right?
+Helloooo ?
+* Foo
+ unchecked git commits
+
+
+
+
 | aeff220 | They breed like rabbits                                             |
 | 1eee6dd | Create a corpse item                                                |
 | 6222d17 | dwarves really die now                                              |
