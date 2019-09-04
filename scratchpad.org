@@ -59,55 +59,24 @@ Oh, a "human" controller with output and a mob controller with "AI"
 only 10% chance to flirt, should help, right?
 Right?
 Helloooo ?
+*** | aeff220 | They breed like rabbits
+... the introduction of "pregnantize" because English is hard
+** "Death" - the reaper process
+*** | 6222d17 | dwarves really die now
+** Use a single tick through a registry to send a tick to everyone
+*** | 90343d4 | god tick, I guess
+** human controller receives messages
+*** | 9bb4c6b | some message passing is happening...
+*** | 3995153 | well there's messages
+Location.depart and Location.arrive
+** First test - end-to-end through telnet
+*** | f98a561 | integration test for telnet?
+**  distributed code and synchronized state is HARD
+*** | a9dedc1 | locs and mobs get out of sync :(
+Hrm.. What am I doing here, what's broken?
 * Foo
  unchecked git commits
 
-
-
-
-| aeff220 | They breed like rabbits                                             |
-| 1eee6dd | Create a corpse item                                                |
-| 6222d17 | dwarves really die now                                              |
-| d40485d | Remove a bunch of stdout                                            |
-| fce025c | if no possible partner, don't crash                                 |
-| 038b4e3 | moar dwarves!                                                       |
-| 90343d4 | god tick, I guess                                                   |
-| 684e9ec | Update README.md                                                    |
-| 8af9edc | very rudimentary tcp echo server                                    |
-| e3315da | add credo to dwarves app                                            |
-| 07c0ef2 | Rename dwarves app to mobs app                                      |
-| db02173 | almost have human controller receiving messages                     |
-| 9bb4c6b | some message passing is happening...                                |
-| 7be4110 | more reasonable                                                     |
-| dd8a036 | troubleshooting without tests                                       |
-| 3995153 | well there's messages                                               |
-| 92588b8 | slightly cleaner message passing                                    |
-| 321805c | a dwarf is replaced by a corpse and a user can look                 |
-| edeab5f | controller dies with mob                                            |
-| aad9c9e | More locations                                                      |
-| 248839d | "quit" command                                                      |
-| a086046 | kill human controller on quit                                       |
-| f98a561 | integration test for telnet?                                        |
-| 1cac461 | Update README.md                                                    |
-| 80c00dd | prepare mobs for testability                                        |
-| 6cf5217 | beginning testing for mating                                        |
-| 6f4f1ba | GERONIMO                                                            |
-| b1cfe5b | now the test fails because the design is bad                        |
-| 0a29abd | elixir works when it's written well                                 |
-| d611716 | add travis.yml                                                      |
-| b610254 | add a quickstart to readme                                          |
-| a95ec74 | Add a build radiator                                                |
-| 826de2c | reproduction in its own module                                      |
-| 028ba3a | Merge branch 'master' of github.com:Trevoke/dwarlixir               |
-| a019860 | More builds, builds everywhere                                      |
-| 794bd62 | new test formatter                                                  |
-| 7682a9f | Merge branch 'master' of github.com:Trevoke/dwarlixir               |
-| 36c6c43 | a third test for dying things                                       |
-| c1deecf | link to test in readme                                              |
-| 28b53cb | Exits are displayed in green                                        |
-| 4b5d655 | one tiny pesky bug..                                                |
-| b2d7f1c | Right. Fix the test too.                                            |
-| a9dedc1 | locs and mobs get out of sync :(                                    |
 | 1911f7f | extract currently common mob functionality                          |
 | e0ccac8 | I think Ι need a proper two-phase commit                            |
 | 7d0c748 | I see when mobs leave and arrive                                    |
