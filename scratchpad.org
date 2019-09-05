@@ -74,12 +74,20 @@ Location.depart and Location.arrive
 **  distributed code and synchronized state is HARD
 *** | a9dedc1 | locs and mobs get out of sync :(
 Hrm.. What am I doing here, what's broken?
+*** | 1911f7f | extract currently common mob functionality
+Severe misunderstanding of the problem doesn't help
+*** | 7d0c748 | I see when mobs leave and arrive
++      # Okay, locs and mobs get out of sync at some point.
++      # I could try to troubleshoot it
++      # Or I could just kill the fucking things
++      # Death to smoochie it is
++      Kernel.apply(module, :stop, [mob_id])
++      World.purge({module, mob_id}, mob_public_info, [state.id])
 * Foo
  unchecked git commits
 
-| 1911f7f | extract currently common mob functionality                          |
-| e0ccac8 | I think Ι need a proper two-phase commit                            |
-| 7d0c748 | I see when mobs leave and arrive                                    |
+
+
 | 2d54d24 | remove some commented code                                          |
 | 9b2b309 | unregister corpse when it poofs away                                |
 | 2b16c5a | maybe a mob just wants to stay where it is                          |
