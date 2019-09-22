@@ -4,15 +4,74 @@
 
 
 * Dwarlixir
+A story of mistakes
+Dwarf Fortress + Elixir + MUD, oh my
+* What's a MUD?
+Multi-User Dungeon
+Text-based multiplayer game
+Read description
+Write commands
+Yes, text-based combat
+* Story begins with Ruby
+GServer - Ruby threads, single core, can only take so many connections
+What if I could ... Create many ruby processes, one per room, and pass the socket to each process?
 
-** Brief intro
-- did NOΤ understand how to think in Erlang/Elixir
-- all about mistakes
-** What's a MUD
+Not that easy - couple of ideas, but forking processes requires copying all of the memory, that gets expensive really fast
 
-** Erlmud
+Drb (Distributed Ruby) seemed like madness at the time (much more reasonable now)
+* Josh Adams (knewter) (Elixir Sips) (Daily Drip)
+Presentation about Elixir at Rubyconf years ago
+Stayed in my mind
+Wait.. Everything is a process? This is PERFECT.
+* Wait.. EVERYTHING?
+Dwarf Fortress!
+world simulation
+What could possibly go wrong?
+...
+Let's find out!
+* So what we're gonna aim for is..
+A world map, with time passing, creatures that can move, die, and reproduce.
+
+And then I balance out the ecosystem
+
+I'm sure that'll be easy
+* what could be cool to talk about
+1. the world generation algorithm improvement
+| fecd9c4 | a small tweak to algo yields perf boost
+2. via tuples
+3. deadlocks
+4. schedulers and ticks: global vs. individuals
+5. how to supervise "dynamic" births?
+6. flooding processes (too many messages, too much time spent processing)
+7. extremely local state
+8. the linux oom killer
+
+
+* First steps
+game of life
+dwarves are processes with X/Y coordinates
+Global state is evil, right?
+So.. Every dwarf holds its own state!
+
+* A "world"
+More game of life, gimme a grid, store which cells are
+* "Time"
+Registries are a cool tool, I'm sure it can't be abused, registries everywhere
+
+I have timers! They hold heartbeats! They can be stopped!
+... That sounds wrong.
+* Death
+Change state with every tick
+When lifespan is 0, just receive the tick and do nothing
+... It's a proof of concept
+* Reproduction
+So it turns out that when multiple processes make synchronous calls to each other, they'll block until they get a response, and that can cause a cascading deadlock.
+
+* The shoulders of giants come in
+TLDR - directed graphs and separate processes to avoid synchronous deadlocks
 https://gitlab.com/zxq9/erlmud/
-** What's Dwarf Fortress
+* The commits of Dwarlixir
+
 ** game of life-style
 *** | c9f6725 | Dwarves have X, Y coordinates and have a Registry (this is pre-Registry)
 ** decentralized / many ticks
@@ -104,8 +163,10 @@ Haha yeah so too many messages here, Ι think
 Trying to be clever by disconnecting events that should be connected (death and reaping)
 *** | ed8e590 | 0.1.7 0.1.6 back to a mob spawning supervisor
 mob-spawning supervisor!
+** Linux oom killer
 *** | ac8e5a9 | 0.2.0 there's an ecosystem in the house
 This is when Ι realized the OOM killer existed
+** More... distributed code? Stuff?
 *** | 479cc41 | 0.4.0 buncha sync stuff is time-bound now
 Trying hard to make things better by allowing more failure
 *** | f5d1a8f | sexual reproduction: pregnant female doesn't mate
@@ -116,3 +177,5 @@ what if a message were, like, almost a struct?
 Obviously MORE processes are the answer?
 * notes
 if ca06ba5 killed the code in pathways for movement, where did I decide to make this change?
+
+Was it a9dedc1?
