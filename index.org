@@ -1,0 +1,67 @@
+#+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t reveal_title_slide:nil
+#+REVEAL_THEME: solarized
+#+REVEAL_ROOT: ./reveal.js-3.8.0
+
+* Dwarlixir
+A story of mistakes
+Dwarf Fortress + Elixir + MUD, oh my
+** Who you're listening to
+Aldric "Trevoke" Giacomoni
+
+#+begin_notes
+<3 Ruby, Smalltalk，Lisp, Elixir
+#+end_notes
+** Why this talk? 1/2
+#+begin_quote
+I know it's everybody's sin
+
+You got to lose to know
+
+How to win
+
+― Dream On, Aerosmith
+#+end_quote
+** Why this talk? 2/2
+#+begin_quote
+I look at the world and I notice it's turning
+
+While my guitar gently weeps
+
+With every mistake we must surely be learning
+
+Still my guitar gently weeps
+
+― The Beatles, While My Guitar Gently Weeps
+#+end_quote
+* Establishing context
+** What's a MUD?
+Multi-User Dungeon
+Text-based multiplayer game
+Read description
+Write commands
+Yes, text-based combat
+** What's Dwarf Fortress?
+Dwarf Fortress!
+world simulation
+What could possibly go wrong?
+...
+Let's find out!
+* So what we're gonna aim for is…
+A world map, with time passing, creatures that can move, die, and reproduce.
+And a telnet connection for people
+
+And then I balance out the ecosystem
+
+I'm sure that'll be easy
+
+* TODO
+- [ ] algorithm improvement
+- [ ] extreme local state
+- [ ] deadlocks
+- [ ] schedulers and the "tick"
+- [ ] flooding processes
+- [ ] linux oom killer
+* Misconception
+A list is like an array
+* Misconception
+extreme local state has got to be better than global state

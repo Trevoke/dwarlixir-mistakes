@@ -3,49 +3,6 @@
 #+REVEAL_ROOT: ./reveal.js-3.8.0
 
 
-* Dwarlixir
-A story of mistakes
-Dwarf Fortress + Elixir + MUD, oh my
-* What's a MUD?
-Multi-User Dungeon
-Text-based multiplayer game
-Read description
-Write commands
-Yes, text-based combat
-* Story begins with Ruby
-GServer - Ruby threads, single core, can only take so many connections
-What if I could ... Create many ruby processes, one per room, and pass the socket to each process?
-
-Not that easy - couple of ideas, but forking processes requires copying all of the memory, that gets expensive really fast
-
-Drb (Distributed Ruby) seemed like madness at the time (much more reasonable now)
-* Josh Adams (knewter) (Elixir Sips) (Daily Drip)
-Presentation about Elixir at Rubyconf years ago
-Stayed in my mind
-Wait.. Everything is a process? This is PERFECT.
-* Wait.. EVERYTHING?
-Dwarf Fortress!
-world simulation
-What could possibly go wrong?
-...
-Let's find out!
-* So what we're gonna aim for is..
-A world map, with time passing, creatures that can move, die, and reproduce.
-
-And then I balance out the ecosystem
-
-I'm sure that'll be easy
-* what could be cool to talk about
-1. the world generation algorithm improvement
-| fecd9c4 | a small tweak to algo yields perf boost
-2. via tuples
-3. deadlocks
-4. schedulers and ticks: global vs. individuals
-5. how to supervise "dynamic" births?
-6. flooding processes (too many messages, too much time spent processing)
-7. extremely local state
-8. the linux oom killer
-
 
 * First steps
 game of life
@@ -70,112 +27,130 @@ So it turns out that when multiple processes make synchronous calls to each othe
 * The shoulders of giants come in
 TLDR - directed graphs and separate processes to avoid synchronous deadlocks
 https://gitlab.com/zxq9/erlmud/
-* The commits of Dwarlixir
 
-** game of life-style
-*** | c9f6725 | Dwarves have X, Y coordinates and have a Registry (this is pre-Registry)
-** decentralized / many ticks
-*** | 48fc61e | Dwarves use :timer.send_interval to send themselves a ping and move to new coordinates
-** a world map
-*** | 576e3f4 | Create a "world" that knows if a location is taken by a dwarf
-*** | 0d2b2ed | Faker, because names are important
-*** | 7b67cff | use built-in Registry finally
+
+
+
+* Notes
+** about deadlocks
+if ca06ba5 killed the code in pathways for movement, where did I decide to make this change?
+
+Was it a9dedc1?
+
+** what could be cool to talk about
+1. the world generation algorithm improvement
+| fecd9c4 | a small tweak to algo yields perf boost
+2. via tuples
+3. deadlocks
+4. schedulers and ticks: global vs. individuals
+5. how to supervise "dynamic" births?
+6. flooding processes (too many messages, too much time spent processing)
+7. extremely local state
+8. the linux oom killer
+
+
+** The commits of Dwarlixir
+
+*** game of life-style
+**** | c9f6725 | Dwarves have X, Y coordinates and have a Registry (this is pre-Registry)
+*** decentralized / many ticks
+**** | 48fc61e | Dwarves use :timer.send_interval to send themselves a ping and move to new coordinates
+*** a world map
+**** | 576e3f4 | Create a "world" that knows if a location is taken by a dwarf
+**** | 0d2b2ed | Faker, because names are important
+**** | 7b67cff | use built-in Registry finally
 - got a world
 - when spinning up a dwarf, ask the world process to store its location
 - moving a dwarf is ~World.move(dwarf)~
-** pausing the game
-*** | 80e2ba8 | pause the game!
+*** pausing the game
+**** | 80e2ba8 | pause the game!
 - more registries can't hurt, right?
 - The time registry now has a heartbeat which Ι could stop -- it sends every creature a message telling it to do its thing.
 - I have timers! They hold heartbeats! They can be stopped! Wait, that sounds murderous.
-** ets sounds cool
-*** | 0a823a6 | Use ets for locations (because that's cool, right?)
+*** ets sounds cool
+**** | 0a823a6 | Use ets for locations (because that's cool, right?)
 - oh god what's with those matchspecs
 - ex2ms? oh good Ι don't have to figure too much out
-** dwarves can die
-*** | ad91c0c | dwarves can die
-** deadlock! uncontrolled synchronous calls
-*** | f447f85 | nyaaargg
+*** dwarves can die
+**** | ad91c0c | dwarves can die
+*** deadlock! uncontrolled synchronous calls
+**** | f447f85 | nyaaargg
 Looking for mates of the other sex through "world neighbors", synchronous calls to dwarves
 DEADLOCKS!
-** Read erlmud
-*** | 11e90b6 | the baby version of locations and pathways
+*** Read erlmud
+**** | 11e90b6 | the baby version of locations and pathways
 Okay Ι get it, async is better
-*** | 317c908 | location spawns pathways
-*** | 69a2079 | Registries everywhere! aaarrghh
+**** | 317c908 | location spawns pathways
+**** | 69a2079 | Registries everywhere! aaarrghh
 Well, LocationRegistry and PathwayRegistry
-** Back to "the game works?"
-*** | 12ad608 | Tick works, moving works
+*** Back to "the game works?"
+**** | 12ad608 | Tick works, moving works
 Dwarves get a tick sent to them and they do stuff
 ... I also introduce an API in World.Location
-*** | ec5d258 | very rudimentary controller implemented
+**** | ec5d258 | very rudimentary controller implemented
 Beginning of separation of business logic from, er ... framework logic?
-*** | deb19d0 | Create a generic mob controller
+**** | deb19d0 | Create a generic mob controller
 Oh, a "human" controller with output and a mob controller with "AI"
-** Okay, back to reproduction
-*** | 995202a | Preparing for mating
+*** Okay, back to reproduction
+**** | 995202a | Preparing for mating
 only 10% chance to flirt, should help, right?
 Right?
 Helloooo ?
-*** | aeff220 | They breed like rabbits
+**** | aeff220 | They breed like rabbits
 ... the introduction of "pregnantize" because English is hard
-** "Death" - the reaper process
-*** | 6222d17 | dwarves really die now
-** Use a single tick through a registry to send a tick to everyone
-*** | 90343d4 | god tick, I guess
-** human controller receives messages
-*** | 9bb4c6b | some message passing is happening...
-*** | 3995153 | well there's messages
+*** "Death" - the reaper process
+**** | 6222d17 | dwarves really die now
+*** Use a single tick through a registry to send a tick to everyone
+**** | 90343d4 | god tick, I guess
+*** human controller receives messages
+**** | 9bb4c6b | some message passing is happening...
+**** | 3995153 | well there's messages
 Location.depart and Location.arrive
-** First test - end-to-end through telnet
-*** | f98a561 | integration test for telnet?
-**  distributed code and synchronized state is HARD
-*** | a9dedc1 | locs and mobs get out of sync :(
+*** First test - end-to-end through telnet
+**** | f98a561 | integration test for telnet?
+***  distributed code and synchronized state is HARD
+**** | a9dedc1 | locs and mobs get out of sync :(
 Hrm.. What am I doing here, what's broken?
-*** | 1911f7f | extract currently common mob functionality
+**** | 1911f7f | extract currently common mob functionality
 Severe misunderstanding of the problem doesn't help
-*** | 7d0c748 | I see when mobs leave and arrive
+**** | 7d0c748 | I see when mobs leave and arrive
 +      # Okay, locs and mobs get out of sync at some point.
 +      # I could try to troubleshoot it
 +      # Or I could just kill the fucking things
 +      # Death to smoochie it is
 +      Kernel.apply(module, :stop, [mob_id])
 +      World.purge({module, mob_id}, mob_public_info, [state.id])
-*** | 5e7afcd | Randomly generated graph and World.overview admin command
+**** | 5e7afcd | Randomly generated graph and World.overview admin command
 Borrow logic from Land of Lisp for world generation
-*** going far with that local state thing: giving all processes the current exits
-**** | 4511e92 | human movement works
-**** | 8fb8229 | just give the mobs the exits, too
-*** | 40abfa3 | bunch of new commands
+**** going far with that local state thing: giving all processes the current exits
+***** | 4511e92 | human movement works
+***** | 8fb8229 | just give the mobs the exits, too
+**** | 40abfa3 | bunch of new commands
 That moment I realized I'm gonna need a command parser
-*** | fecd9c4 | a small tweak to algo yields perf boost
+**** | fecd9c4 | a small tweak to algo yields perf boost
 Wherein we learn that runtime complexity is a thing.
-*** | e1b1c2b | arguably improved design
+**** | e1b1c2b | arguably improved design
 At least one thing here: don't put the actual pid in the registry.
 And here's where we start to ask the question, what's the limit of pattern matching usability?
-*** | 9479d44 | I bow to the genserver gods
+**** | 9479d44 | I bow to the genserver gods
 start_link -> start
-*** | fb6acf6 | foo
+**** | fb6acf6 | foo
 A great commit message for a utility to load info from config or environment
-*** | 3a640a8 | Okay, fifteen mobs is enough thanks
+**** | 3a640a8 | Okay, fifteen mobs is enough thanks
 Haha yeah so too many messages here, Ι think
-*** | 6961c4b | Use OTP process termination when a mob dies
+**** | 6961c4b | Use OTP process termination when a mob dies
 Trying to be clever by disconnecting events that should be connected (death and reaping)
-*** | ed8e590 | 0.1.7 0.1.6 back to a mob spawning supervisor
+**** | ed8e590 | 0.1.7 0.1.6 back to a mob spawning supervisor
 mob-spawning supervisor!
-** Linux oom killer
-*** | ac8e5a9 | 0.2.0 there's an ecosystem in the house
+*** Linux oom killer
+**** | ac8e5a9 | 0.2.0 there's an ecosystem in the house
 This is when Ι realized the OOM killer existed
-** More... distributed code? Stuff?
-*** | 479cc41 | 0.4.0 buncha sync stuff is time-bound now
+*** More... distributed code? Stuff?
+**** | 479cc41 | 0.4.0 buncha sync stuff is time-bound now
 Trying hard to make things better by allowing more failure
-*** | f5d1a8f | sexual reproduction: pregnant female doesn't mate
+**** | f5d1a8f | sexual reproduction: pregnant female doesn't mate
 Well it took me a while to think about /that one/.
-*** | fd2b2c7 | queues messages, nothing spawns
+**** | fd2b2c7 | queues messages, nothing spawns
 what if a message were, like, almost a struct?
-*** | a1f2926 | mob state in an agent
+**** | a1f2926 | mob state in an agent
 Obviously MORE processes are the answer?
-* notes
-if ca06ba5 killed the code in pathways for movement, where did I decide to make this change?
-
-Was it a9dedc1?
