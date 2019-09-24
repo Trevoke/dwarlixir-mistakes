@@ -48,20 +48,96 @@ What could possibly go wrong?
 Let's find out!
 * So what we're gonna aim for is…
 A world map, with time passing, creatures that can move, die, and reproduce.
+
 And a telnet connection for people
 
 And then I balance out the ecosystem
 
 I'm sure that'll be easy
 
-* TODO
-- [ ] algorithm improvement
-- [ ] extreme local state
-- [ ] deadlocks
-- [ ] schedulers and the "tick"
-- [ ] flooding processes
-- [ ] linux oom killer
-* Misconception
+* Roadmap
+- [0/6]
+  - [ ] algorithm improvement
+  - [ ] extreme local state
+  - [ ] distributed state
+  - [ ] schedulers and the "tick"
+  - [ ] flooding processes
+  - [ ] linux oom killer
+** Algorithm improvement
+*** Misconception
 A list is like an array
-* Misconception
+*** Impact
+Way more data structures initialized than necessary
+* Roadmap
+- [1/6]
+  - [X] algorithm improvement
+  - [ ] extreme local state
+  - [ ] distributed state
+  - [ ] schedulers and the "tick"
+  - [ ] flooding processes
+  - [ ] linux oom killer
+** Extreme local state
+*** Misconception
 extreme local state has got to be better than global state
+*** Impact
+Deadlocks
+* Roadmap
+- [2/6]
+  - [X] algorithm improvement
+  - [X] extreme local state
+  - [ ] distributed state
+  - [ ] schedulers and the "tick"
+  - [ ] flooding processes
+  - [ ] linux oom killer
+** Distributed state
+*** Misconception
+I'm smart
+*** Impact
+Deadlocks
+* Roadmap
+- [3/6]
+  - [X] algorithm improvement
+  - [X] extreme local state
+  - [X] distributed state
+  - [ ] schedulers and the "tick"
+  - [ ] flooding processes
+  - [ ] linux oom killer
+** Schedulers and the "tick"
+*** Misconception
+There won't be a sizable impact to sending lots of processes a message at the same time
+*** Impact
+
+* Roadmap
+- [4/6]
+  - [X] algorithm improvement
+  - [X] extreme local state
+  - [X] distributed state
+  - [X] schedulers and the "tick"
+  - [ ] flooding processes
+  - [ ] linux oom killer
+** flooding processes
+*** Misconception
+It's hard to send a process too many messages
+*** Impact
+
+* Roadmap
+- [5/6]
+  - [X] algorithm improvement
+  - [X] extreme local state
+  - [X] distributed state
+  - [X] schedulers and the "tick"
+  - [X] flooding processes
+  - [ ] linux oom killer
+** linux OOM killer
+*** Misconception
+My world simulation won't grow unboundedly in RAM usage
+*** Impact
+* Roadmap
+- [6/6]
+  - [X] algorithm improvement
+  - [X] extreme local state
+  - [X] distributed state
+  - [X] schedulers and the "tick"
+  - [X] flooding processes
+  - [X] linux oom killer
+** Q&A

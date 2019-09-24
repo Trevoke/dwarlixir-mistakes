@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title></title>
+<meta name="author" content="(Aldric Giacomoni)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js-3.8.0/css/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js-3.8.0/css/theme/solarized.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = './reveal.js-3.8.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<section>
+<section id="slide-org7c20deb">
+<h2 id="org7c20deb">Dwarlixir</h2>
+<p>
+A story of mistakes
+Dwarf Fortress + Elixir + MUD, oh my
+</p>
+</section>
+<section id="slide-org5b89f56">
+<h3 id="org5b89f56">Who you're listening to</h3>
+<p>
+Aldric "Trevoke" Giacomoni
+</p>
+
+<aside class="notes">
+<p>
+&lt;3 Ruby, Smalltalk，Lisp, Elixir
+</p>
+
+</aside>
+</section>
+<section id="slide-orgcb4f711">
+<h3 id="orgcb4f711">Why this talk? 1/2</h3>
+<blockquote nil>
+<p>
+I know it's everybody's sin
+</p>
+
+<p>
+You got to lose to know
+</p>
+
+<p>
+How to win
+</p>
+
+<p>
+― Dream On, Aerosmith
+</p>
+</blockquote>
+</section>
+<section id="slide-org085d303">
+<h3 id="org085d303">Why this talk? 2/2</h3>
+<blockquote nil>
+<p>
+I look at the world and I notice it's turning
+</p>
+
+<p>
+While my guitar gently weeps
+</p>
+
+<p>
+With every mistake we must surely be learning
+</p>
+
+<p>
+Still my guitar gently weeps
+</p>
+
+<p>
+― The Beatles, While My Guitar Gently Weeps
+</p>
+</blockquote>
+</section>
+</section>
+<section>
+<section id="slide-orgdb33b77">
+<h2 id="orgdb33b77">Establishing context</h2>
+<div class="outline-text-2" id="text-orgdb33b77">
+</div>
+</section>
+<section id="slide-org053b974">
+<h3 id="org053b974">What's a MUD?</h3>
+<p>
+Multi-User Dungeon
+Text-based multiplayer game
+Read description
+Write commands
+Yes, text-based combat
+</p>
+</section>
+<section id="slide-orgef653e3">
+<h3 id="orgef653e3">What's Dwarf Fortress?</h3>
+<p>
+Dwarf Fortress!
+world simulation
+What could possibly go wrong?
+...
+Let's find out!
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org4045533">
+<h2 id="org4045533">So what we're gonna aim for is…</h2>
+<p>
+A world map, with time passing, creatures that can move, die, and reproduce.
+And a telnet connection for people
+</p>
+
+<p>
+And then I balance out the ecosystem
+</p>
+
+<p>
+I'm sure that'll be easy
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org9064334">
+<h2 id="org9064334">Roadmap</h2>
+<ul>
+<li><code>[0/6]</code>
+<ul>
+<li class="off"><code>[&#xa0;]</code> algorithm improvement</li>
+<li class="off"><code>[&#xa0;]</code> extreme local state</li>
+<li class="off"><code>[&#xa0;]</code> deadlocks</li>
+<li class="off"><code>[&#xa0;]</code> schedulers and the "tick"</li>
+<li class="off"><code>[&#xa0;]</code> flooding processes</li>
+<li class="off"><code>[&#xa0;]</code> linux oom killer</li>
+
+</ul></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org45c999a">
+<h2 id="org45c999a">Algorithm improvement</h2>
+<div class="outline-text-2" id="text-org45c999a">
+</div>
+</section>
+<section id="slide-org5687b15">
+<h3 id="org5687b15">Misconception</h3>
+<p>
+A list is like an array
+</p>
+</section>
+</section>
+<section>
+<section id="slide-orgf176f85">
+<h2 id="orgf176f85">Roadmap</h2>
+<ul>
+<li><code>[1/6]</code>
+<ul>
+<li class="on"><code>[X]</code> algorithm improvement</li>
+<li class="off"><code>[&#xa0;]</code> extreme local state</li>
+<li class="off"><code>[&#xa0;]</code> deadlocks</li>
+<li class="off"><code>[&#xa0;]</code> schedulers and the "tick"</li>
+<li class="off"><code>[&#xa0;]</code> flooding processes</li>
+<li class="off"><code>[&#xa0;]</code> linux oom killer</li>
+
+</ul></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orgc359a3a">
+<h2 id="orgc359a3a">Extreme local state</h2>
+<div class="outline-text-2" id="text-orgc359a3a">
+</div>
+</section>
+<section id="slide-orga588dd6">
+<h3 id="orga588dd6">Misconception</h3>
+<p>
+extreme local state has got to be better than global state
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js-3.8.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: './reveal.js-3.8.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: './reveal.js-3.8.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: './reveal.js-3.8.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: './reveal.js-3.8.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: './reveal.js-3.8.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>
