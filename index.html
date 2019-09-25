@@ -28,15 +28,15 @@
 <div class="slides">
 
 <section>
-<section id="slide-org7c20deb">
-<h2 id="org7c20deb">Dwarlixir</h2>
+<section id="slide-org7b6cc91">
+<h2 id="org7b6cc91">Dwarlixir</h2>
 <p>
 A story of mistakes
 Dwarf Fortress + Elixir + MUD, oh my
 </p>
 </section>
-<section id="slide-org5b89f56">
-<h3 id="org5b89f56">Who you're listening to</h3>
+<section id="slide-orgcb5f70e">
+<h3 id="orgcb5f70e">Who you're listening to</h3>
 <p>
 Aldric "Trevoke" Giacomoni
 </p>
@@ -48,8 +48,8 @@ Aldric "Trevoke" Giacomoni
 
 </aside>
 </section>
-<section id="slide-orgcb4f711">
-<h3 id="orgcb4f711">Why this talk? 1/2</h3>
+<section id="slide-org76fea35">
+<h3 id="org76fea35">Why this talk? 1/2</h3>
 <blockquote nil>
 <p>
 I know it's everybody's sin
@@ -68,8 +68,8 @@ How to win
 </p>
 </blockquote>
 </section>
-<section id="slide-org085d303">
-<h3 id="org085d303">Why this talk? 2/2</h3>
+<section id="slide-orgb3456ff">
+<h3 id="orgb3456ff">Why this talk? 2/2</h3>
 <blockquote nil>
 <p>
 I look at the world and I notice it's turning
@@ -94,13 +94,13 @@ Still my guitar gently weeps
 </section>
 </section>
 <section>
-<section id="slide-orgdb33b77">
-<h2 id="orgdb33b77">Establishing context</h2>
-<div class="outline-text-2" id="text-orgdb33b77">
+<section id="slide-org25ab1e5">
+<h2 id="org25ab1e5">Establishing context</h2>
+<div class="outline-text-2" id="text-org25ab1e5">
 </div>
 </section>
-<section id="slide-org053b974">
-<h3 id="org053b974">What's a MUD?</h3>
+<section id="slide-orgaa14647">
+<h3 id="orgaa14647">What's a MUD?</h3>
 <p>
 Multi-User Dungeon
 Text-based multiplayer game
@@ -109,8 +109,8 @@ Write commands
 Yes, text-based combat
 </p>
 </section>
-<section id="slide-orgef653e3">
-<h3 id="orgef653e3">What's Dwarf Fortress?</h3>
+<section id="slide-orge2062cb">
+<h3 id="orge2062cb">What's Dwarf Fortress?</h3>
 <p>
 Dwarf Fortress!
 world simulation
@@ -121,10 +121,13 @@ Let's find out!
 </section>
 </section>
 <section>
-<section id="slide-org4045533">
-<h2 id="org4045533">So what we're gonna aim for is…</h2>
+<section id="slide-orgbbea435">
+<h2 id="orgbbea435">So what we're gonna aim for is…</h2>
 <p>
 A world map, with time passing, creatures that can move, die, and reproduce.
+</p>
+
+<p>
 And a telnet connection for people
 </p>
 
@@ -139,14 +142,14 @@ I'm sure that'll be easy
 </section>
 </section>
 <section>
-<section id="slide-org9064334">
-<h2 id="org9064334">Roadmap</h2>
+<section id="slide-org7514df8">
+<h2 id="org7514df8">Roadmap</h2>
 <ul>
 <li><code>[0/6]</code>
 <ul>
 <li class="off"><code>[&#xa0;]</code> algorithm improvement</li>
 <li class="off"><code>[&#xa0;]</code> extreme local state</li>
-<li class="off"><code>[&#xa0;]</code> deadlocks</li>
+<li class="off"><code>[&#xa0;]</code> distributed state</li>
 <li class="off"><code>[&#xa0;]</code> schedulers and the "tick"</li>
 <li class="off"><code>[&#xa0;]</code> flooding processes</li>
 <li class="off"><code>[&#xa0;]</code> linux oom killer</li>
@@ -155,29 +158,33 @@ I'm sure that'll be easy
 
 </ul>
 </section>
-</section>
-<section>
-<section id="slide-org45c999a">
-<h2 id="org45c999a">Algorithm improvement</h2>
-<div class="outline-text-2" id="text-org45c999a">
+<section id="slide-org472fa73">
+<h3 id="org472fa73">Algorithm improvement</h3>
+<div class="outline-text-3" id="text-org472fa73">
 </div>
 </section>
-<section id="slide-org5687b15">
-<h3 id="org5687b15">Misconception</h3>
+<section id="slide-orgd580ddf">
+<h4 id="orgd580ddf">Misconception</h4>
 <p>
 A list is like an array
 </p>
 </section>
+<section id="slide-org7e47ca7">
+<h4 id="org7e47ca7">Impact</h4>
+<p>
+Way more data structures initialized than necessary
+</p>
+</section>
 </section>
 <section>
-<section id="slide-orgf176f85">
-<h2 id="orgf176f85">Roadmap</h2>
+<section id="slide-org51f8327">
+<h2 id="org51f8327">Roadmap</h2>
 <ul>
 <li><code>[1/6]</code>
 <ul>
 <li class="on"><code>[X]</code> algorithm improvement</li>
 <li class="off"><code>[&#xa0;]</code> extreme local state</li>
-<li class="off"><code>[&#xa0;]</code> deadlocks</li>
+<li class="off"><code>[&#xa0;]</code> distributed state</li>
 <li class="off"><code>[&#xa0;]</code> schedulers and the "tick"</li>
 <li class="off"><code>[&#xa0;]</code> flooding processes</li>
 <li class="off"><code>[&#xa0;]</code> linux oom killer</li>
@@ -186,18 +193,176 @@ A list is like an array
 
 </ul>
 </section>
-</section>
-<section>
-<section id="slide-orgc359a3a">
-<h2 id="orgc359a3a">Extreme local state</h2>
-<div class="outline-text-2" id="text-orgc359a3a">
+<section id="slide-org8e5f5ec">
+<h3 id="org8e5f5ec">Extreme local state</h3>
+<div class="outline-text-3" id="text-org8e5f5ec">
 </div>
 </section>
-<section id="slide-orga588dd6">
-<h3 id="orga588dd6">Misconception</h3>
+<section id="slide-org6fc429b">
+<h4 id="org6fc429b">Misconception</h4>
 <p>
 extreme local state has got to be better than global state
 </p>
+</section>
+<section id="slide-org494fe94">
+<h4 id="org494fe94">Impact</h4>
+<p>
+Deadlocks
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org227b323">
+<h2 id="org227b323">Roadmap</h2>
+<ul>
+<li><code>[2/6]</code>
+<ul>
+<li class="on"><code>[X]</code> algorithm improvement</li>
+<li class="on"><code>[X]</code> extreme local state</li>
+<li class="off"><code>[&#xa0;]</code> distributed state</li>
+<li class="off"><code>[&#xa0;]</code> schedulers and the "tick"</li>
+<li class="off"><code>[&#xa0;]</code> flooding processes</li>
+<li class="off"><code>[&#xa0;]</code> linux oom killer</li>
+
+</ul></li>
+
+</ul>
+</section>
+<section id="slide-org9e52f72">
+<h3 id="org9e52f72">Distributed state</h3>
+<div class="outline-text-3" id="text-org9e52f72">
+</div>
+</section>
+<section id="slide-org4798dbc">
+<h4 id="org4798dbc">Misconception</h4>
+<p>
+I'm smart
+</p>
+</section>
+<section id="slide-org3f16107">
+<h4 id="org3f16107">Impact</h4>
+<p>
+Deadlocks
+</p>
+</section>
+</section>
+<section>
+<section id="slide-orgb415a98">
+<h2 id="orgb415a98">Roadmap</h2>
+<ul>
+<li><code>[3/6]</code>
+<ul>
+<li class="on"><code>[X]</code> algorithm improvement</li>
+<li class="on"><code>[X]</code> extreme local state</li>
+<li class="on"><code>[X]</code> distributed state</li>
+<li class="off"><code>[&#xa0;]</code> schedulers and the "tick"</li>
+<li class="off"><code>[&#xa0;]</code> flooding processes</li>
+<li class="off"><code>[&#xa0;]</code> linux oom killer</li>
+
+</ul></li>
+
+</ul>
+</section>
+<section id="slide-org6a4cdac">
+<h3 id="org6a4cdac">Schedulers and the "tick"</h3>
+<div class="outline-text-3" id="text-org6a4cdac">
+</div>
+</section>
+<section id="slide-org33d7c36">
+<h4 id="org33d7c36">Misconception</h4>
+<p>
+There won't be a sizable impact to sending lots of processes a message at the same time
+</p>
+</section>
+<section id="slide-org630442b">
+<h4 id="org630442b">Impact</h4>
+
+</section>
+</section>
+<section>
+<section id="slide-orgdd06f07">
+<h2 id="orgdd06f07">Roadmap</h2>
+<ul>
+<li><code>[4/6]</code>
+<ul>
+<li class="on"><code>[X]</code> algorithm improvement</li>
+<li class="on"><code>[X]</code> extreme local state</li>
+<li class="on"><code>[X]</code> distributed state</li>
+<li class="on"><code>[X]</code> schedulers and the "tick"</li>
+<li class="off"><code>[&#xa0;]</code> flooding processes</li>
+<li class="off"><code>[&#xa0;]</code> linux oom killer</li>
+
+</ul></li>
+
+</ul>
+</section>
+<section id="slide-org15af9af">
+<h3 id="org15af9af">flooding processes</h3>
+<div class="outline-text-3" id="text-org15af9af">
+</div>
+</section>
+<section id="slide-org4832a08">
+<h4 id="org4832a08">Misconception</h4>
+<p>
+It's hard to send a process too many messages
+</p>
+</section>
+<section id="slide-org1b94487">
+<h4 id="org1b94487">Impact</h4>
+
+</section>
+</section>
+<section>
+<section id="slide-org34c6e29">
+<h2 id="org34c6e29">Roadmap</h2>
+<ul>
+<li><code>[5/6]</code>
+<ul>
+<li class="on"><code>[X]</code> algorithm improvement</li>
+<li class="on"><code>[X]</code> extreme local state</li>
+<li class="on"><code>[X]</code> distributed state</li>
+<li class="on"><code>[X]</code> schedulers and the "tick"</li>
+<li class="on"><code>[X]</code> flooding processes</li>
+<li class="off"><code>[&#xa0;]</code> linux oom killer</li>
+
+</ul></li>
+
+</ul>
+</section>
+<section id="slide-org487f510">
+<h3 id="org487f510">linux OOM killer</h3>
+<div class="outline-text-3" id="text-org487f510">
+</div>
+</section>
+<section id="slide-orge636261">
+<h4 id="orge636261">Misconception</h4>
+<p>
+My world simulation won't grow unboundedly in RAM usage
+</p>
+</section>
+<section id="slide-org46279f7">
+<h4 id="org46279f7">Impact</h4>
+</section>
+</section>
+<section>
+<section id="slide-org16dd844">
+<h2 id="org16dd844">Roadmap</h2>
+<ul>
+<li><code>[6/6]</code>
+<ul>
+<li class="on"><code>[X]</code> algorithm improvement</li>
+<li class="on"><code>[X]</code> extreme local state</li>
+<li class="on"><code>[X]</code> distributed state</li>
+<li class="on"><code>[X]</code> schedulers and the "tick"</li>
+<li class="on"><code>[X]</code> flooding processes</li>
+<li class="on"><code>[X]</code> linux oom killer</li>
+
+</ul></li>
+
+</ul>
+</section>
+<section id="slide-orgcc2c57c">
+<h3 id="orgcc2c57c">Q&amp;A</h3>
 </section>
 </section>
 </div>

@@ -1,4 +1,5 @@
 #+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t reveal_title_slide:nil
+#+REVEAL_HIGHLIGHT_CSS: solarized
 #+REVEAL_THEME: solarized
 #+REVEAL_ROOT: ./reveal.js-3.8.0
 
@@ -55,7 +56,7 @@ And then I balance out the ecosystem
 
 I'm sure that'll be easy
 
-* Roadmap
+** Roadmap
 - [0/6]
   - [ ] algorithm improvement
   - [ ] extreme local state
@@ -63,12 +64,12 @@ I'm sure that'll be easy
   - [ ] schedulers and the "tick"
   - [ ] flooding processes
   - [ ] linux oom killer
-** Algorithm improvement
-*** Misconception
+* Algorithm improvement
+** Misconception
 A list is like an array
-*** Impact
+** Impact
 Way more data structures initialized than necessary
-* Roadmap
+** Roadmap
 - [1/6]
   - [X] algorithm improvement
   - [ ] extreme local state
@@ -76,12 +77,12 @@ Way more data structures initialized than necessary
   - [ ] schedulers and the "tick"
   - [ ] flooding processes
   - [ ] linux oom killer
-** Extreme local state
-*** Misconception
+* Extreme local state
+** Misconception
 extreme local state has got to be better than global state
-*** Impact
+** Impact
 Deadlocks
-* Roadmap
+** Roadmap
 - [2/6]
   - [X] algorithm improvement
   - [X] extreme local state
@@ -89,12 +90,12 @@ Deadlocks
   - [ ] schedulers and the "tick"
   - [ ] flooding processes
   - [ ] linux oom killer
-** Distributed state
-*** Misconception
+* Distributed state
+** Misconception
 I'm smart
-*** Impact
+** Impact
 Deadlocks
-* Roadmap
+** Roadmap
 - [3/6]
   - [X] algorithm improvement
   - [X] extreme local state
@@ -102,12 +103,12 @@ Deadlocks
   - [ ] schedulers and the "tick"
   - [ ] flooding processes
   - [ ] linux oom killer
-** Schedulers and the "tick"
-*** Misconception
+* Schedulers and the "tick"
+** Misconception
 There won't be a sizable impact to sending lots of processes a message at the same time
-*** Impact
+** Impact
 
-* Roadmap
+** Roadmap
 - [4/6]
   - [X] algorithm improvement
   - [X] extreme local state
@@ -115,12 +116,12 @@ There won't be a sizable impact to sending lots of processes a message at the sa
   - [X] schedulers and the "tick"
   - [ ] flooding processes
   - [ ] linux oom killer
-** flooding processes
-*** Misconception
+* flooding processes
+** Misconception
 It's hard to send a process too many messages
-*** Impact
+** Impact
 
-* Roadmap
+** Roadmap
 - [5/6]
   - [X] algorithm improvement
   - [X] extreme local state
@@ -128,11 +129,11 @@ It's hard to send a process too many messages
   - [X] schedulers and the "tick"
   - [X] flooding processes
   - [ ] linux oom killer
-** linux OOM killer
-*** Misconception
+* linux OOM killer
+** Misconception
 My world simulation won't grow unboundedly in RAM usage
-*** Impact
-* Roadmap
+** Impact
+** Roadmap
 - [6/6]
   - [X] algorithm improvement
   - [X] extreme local state
@@ -140,4 +141,4 @@ My world simulation won't grow unboundedly in RAM usage
   - [X] schedulers and the "tick"
   - [X] flooding processes
   - [X] linux oom killer
-** Q&A
+* Q&A
