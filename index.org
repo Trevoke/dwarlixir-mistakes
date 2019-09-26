@@ -67,8 +67,43 @@ I'm sure that'll be easy
 * Algorithm improvement
 ** Misconception
 A list is like an array
+** Story
+#+REVEAL_HTML: <img class="stretch" src="landoflisp.png">
+#+begin_notes
+Land of Lisp
+
+Grand Theft Wumpus
+#+end_notes
+** Graph
+#+REVEAL_HTML: <img class="stretch" src="wumpus-map.png">
+
+#+begin_notes
+World: Graph
+
+Edges and nodes
+
+First, generate edges between pairs of nodes
+
+Then traverse and, if you find any islands, connect them.
+
+#+end_notes
 ** Impact
-Way more data structures initialized than necessary
+Lots of data structures initialized
+
+Lots of data being copied
+
+VERY SLOW
+** Fix
+#+REVEAL_HTML: <img class="stretch" src="algorithm-diff.png">
+#+begin_notes
+This is inside traverse/3 - a recursive call.
+traverse/3 returns a list of visited nodes
+
+Don't name your variables x and y unless they're cartesian coordinates
+
+x is a list of visited nodes
+y is a list of edges from this node
+#+end_notes
 ** Roadmap
 - [1/6]
   - [X] algorithm improvement
@@ -80,8 +115,33 @@ Way more data structures initialized than necessary
 * Extreme local state
 ** Misconception
 extreme local state has got to be better than global state
+** Story
+"Actor model?" Moar like extreme object-oriented, amirite?
+
+#+begin_notes
+- Creatures
+- GenServers
+- Local state: can have hat or sunglasses
+- "random action"
+- Imagine the person can say "Nice hat" or "Nice Sunglasses"
+- But they have to /check/ first of course.
+- So they send a synchronous message to other processes to check what the state is
+- But.. Other processes are all doing the same thing
+#+end_notes
 ** Impact
+Think "Dining Philosophers" problem.
+
+A → B
+B → C
+C → A
+
 Deadlocks
+** Fix 1
+Some state is global.
+
+I know it's a boring answer.
+** Fix 2
+Create
 ** Roadmap
 - [2/6]
   - [X] algorithm improvement
