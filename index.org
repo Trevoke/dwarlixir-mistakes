@@ -67,10 +67,16 @@ A mix of a MUD and Dwarf Fortress
 
 #+begin_notes
 Multi-User Dungeon
+
 Text-based multiplayer game
+
 Read description
+
 Write commands
+
 Yes, text-based combat
+
+telnet / web
 #+end_notes
 
 ** What's Dwarf Fortress?
@@ -78,7 +84,13 @@ Yes, text-based combat
 
 #+begin_notes
 Dwarf Fortress!
+
 world simulation
+
+lots of emergent behavior
+
+players have fun because they create a lot of stories
+
 What could possibly go wrong?
 
 Let's find out!
@@ -91,7 +103,10 @@ Let's find out!
 - creatures that can die
 - creatures that can reproduce.
 - And then I balance out the ecosystem
+** I am not a game designer
+Nothing here constitutes *good* advice.
 
+Seriously.
 ** Roadmap
 - [0/6]
   - [ ] algorithm improvement
@@ -100,6 +115,20 @@ Let's find out!
   - [ ] schedulers and the "tick"
   - [ ] flooding processes
   - [ ] linux oom killer
+
+#+begin_notes
+dip toes: algorithm improvement
+
+too much state in processes
+
+even more too much state
+
+beam vm schedulers (erlang virtual machine)
+
+sending too many messages to processes
+
+linux protects itself
+#+end_notes
 * Algorithm improvement
 ** Misconception
 A list is like an array
@@ -120,26 +149,41 @@ World: Graph
 
 Edges and nodes
 
-First, generate edges between pairs of nodes
+First, random generation of edges between pairs of nodes
 
-Then traverse and, if you find any islands, connect them.
+Then traverse original and, if you find any islands, connect them.
 
+SHIP IT!
+#+end_notes
+** Key code
+This is within ~traverse/3~
+#+begin_src elixir
+Enum.flat_map(
+  edges_from_node,
+  fn({_source, destination}) -> traverse(destination,
+                                         edge_list,
+                                         visited_nodes)
+  end
+)
+#+end_src
+
+#+begin_notes
+flat_map is what we care about here
 #+end_notes
 ** Impact
-Lots of data structures initialized
+Lots of data structures initialized recursively
 
-Lots of data being copied
+Lots of data being copied when flattening
 
 VERY SLOW
 ** Fix
 #+REVEAL_HTML: <img class="stretch" src="algorithm-diff.png">
-#+begin_notes
-This is inside traverse/3 - a recursive call.
-traverse/3 returns a list of visited nodes
 
+#+begin_notes
 Don't name your variables x and y unless they're cartesian coordinates
 
 x is a list of visited nodes
+
 y is a list of edges from this node
 #+end_notes
 ** Roadmap
@@ -153,6 +197,10 @@ y is a list of edges from this node
 * Extreme local state
 ** Misconception
 extreme local state has got to be better than global state
+
+#+begin_notes
+Alan Kay once said, "OOP to me means only messaging, local retention, and protection and hiding of state-process, and extreme late-binding of all things"
+#+end_notes
 ** Story
 "Actor model?" Moar like extreme object-oriented, amirite?
 
@@ -168,19 +216,27 @@ extreme local state has got to be better than global state
 #+end_notes
 ** Impact
 A → B
+
 B → C
+
 C → A
 
 Deadlocks
 #+begin_notes
 Think "Dining Philosophers" problem.
 #+end_notes
-** Fix 1
+** Fix
 Some state is global.
 
 I know it's a boring answer.
-** Fix 2
-Create
+
+#+begin_notes
+choices for where the state goes
+
+the big elixir last year
+"stateful servers"
+hot deploys
+#+end_notes
 ** Roadmap
 - [2/6]
   - [X] algorithm improvement
@@ -190,8 +246,19 @@ Create
   - [ ] flooding processes
   - [ ] linux oom killer
 * Distributed state
+#+begin_notes
+wish Ι could say I figured out the "global state"
+#+end_notes
 ** Misconception
 Fewer synchronous calls will reduce the opportunity of deadlocks
+#+begin_notes
+which synchronous calls, not how many
+
+- dwarf went to new location
+- copy exits into dwarf state
+- copy loc id into dwarf state
+- copy basic dwarf info into location state
+#+end_notes
 ** Story
 Moar local state in moar local places
 #+begin_notes
@@ -206,7 +273,22 @@ Surely that was going to work, right?
 ** Impact
 Accidentally multiple sources of truths
 #+begin_notes
-Because of super local
+two-phase commits; lock multiple processes to ensure synchronization
+#+end_notes
+** Fix
+Some state is global
+
+OR! Go look at erlmud
+
+"separate process" that handles state shifting
+#+begin_notes
+like picking up something off the floor
+
+create a Hand process
+
+Means neither floor nor creature have to block because another process is starting the synchronous calls
+
+would give this a more serious shot today if I could
 #+end_notes
 ** Roadmap
 - [3/6]
@@ -217,22 +299,63 @@ Because of super local
   - [ ] flooding processes
   - [ ] linux oom killer
 * Schedulers and the "tick"
+#+REVEAL_HTML: <img class="stretch" src="gospers_glider_gun.gif">
+
+#+begin_notes
+"game of life"
+
+the "tick" is the unit of time: every time a tick happens, everything in the world happens
+#+end_notes
 ** Misconception
 There won't be a sizable impact to sending lots of processes a message at the same time
+
+#+begin_notes
+when the heartbeat happens every process acts
+#+end_notes
 ** Story
 The tick (not the blue one)
 
 #+begin_notes
-Registry, Petimer, self-ticks
+Registry (broadcast)
+
+Petimer (managed recurring messages)
+
+"Heartbeat manager process"
+
+Pause life
 #+end_notes
 ** Impact
 All schedulers triggered at same time - literally a heartbeat of intense CPU usage on the box
+
+#+begin_notes
+BEAM VM has a pre-emptive scheduler
+
+This means it coordinates the processes' actions
+
+This is done through something called "reductions"
+
+The scheduler allocates a set number of reductions to each process. Each action costs a certain number of reductions. When the number of reductions hits zero, the scheduler moves on to the next process.
+
+for a game - heartbeat every 1-6 seconds
+
+So this was an incredibly regular cadence of CPU usage, but that also meant there was a clear bound to growth: at some point, CPUs wouldn't be able to allow every process to make their move at the same time.
+#+end_notes
 ** Fix
 More or less "any other way"
 
 I opted for "all manage their own ticks"
 
 Never mind how untestable that makes the system
+
+Smarter fix is probably "bounded global ticks" so that some control can be exerted more easily
+
+#+begin_notes
+if you have a couple of rooms - control those with its own heartbeat manager
+
+really didn't want "everything to act at the same time"
+
+I wanted events
+#+end_notes
 ** Roadmap
 - [4/6]
   - [X] algorithm improvement
@@ -244,8 +367,51 @@ Never mind how untestable that makes the system
 * flooding processes
 ** Misconception
 It's hard to send a process too many messages
+** Story
+#+begin_notes
+- everything had its flow
+- "events" would rule
+- "events" were chaotic
+- every time something would happen in the "room" process
+- an event would go to every living creature in the room so they could respond to it
+- and players would have this event transformed to text
+- again - every action goes to every creature. that's N^2.
+- N^2 is bad.
+#+end_notes
 ** Impact
+The process that printed stuff to the console died
+#+begin_notes
 
+What did it have to do?
+- create a string
+- send it over the network (telnet)
+
+Processes have "Reductions"
+
+pre-emptive scheduler means processes only get so many actions before another process gets their turn
+
+sending a message gets more expensive as THE RECEIVING PROCESS has more messages in the mailbox
+
+elements of self-balancing in the VM
+
+force rest of system to slow down to allow congestion to clear up
+
+Crucially: CPU time higher than time between messages
+
+Processes are "single-threaded", process messages one at a time
+
+Possibly constructing strings instead of IO strings made things worse
+
+#+end_notes
+** Fix
+Batch messages
+#+begin_notes
+realization: more of a single heartbeat
+
+... Took me to Entity Component System - game design pattern
+
+And that took me to a complete overhaul of the system
+#+end_notes
 ** Roadmap
 - [5/6]
   - [X] algorithm improvement
@@ -257,8 +423,11 @@ It's hard to send a process too many messages
 * linux OOM killer
 ** Misconception
 My world simulation won't grow unboundedly in RAM usage
+#+begin_notes
+remember when Ι said I would balance the ecosystem?
+#+end_notes
 ** Story
-"Emergent Design"
+"Emergent Behavior"
 #+begin_notes
 world simulation: reproduction and death
 
@@ -268,6 +437,25 @@ balancing lifespan with likelihood of becoming pregnant and length of pregnancy 
 The operating system does what it needs to do to stay up
 #+begin_notes
 I'd launch the game, and after an hour and a half someone would say "Hey, your game is down"
+
+Linux has an out of memory killer
+
+kill non-essential processes using too much RAM
+
+We don't see this often because for the most part, the RAM that is "used" is actually free
+
+extreme local state: extreme local state
+#+end_notes
+** Fix
+Ecosystem
+#+begin_notes
+I literally created an Elixir process that would check regularly how much RAM was available
+
+If less than 15% RAM was available, I'd stop births
+
+If more than 20% RAM available, allow births
+
+prod systems are so much more predictable
 #+end_notes
 ** Roadmap
 - [6/6]
@@ -277,4 +465,68 @@ I'd launch the game, and after an hour and a half someone would say "Hey, your g
   - [X] schedulers and the "tick"
   - [X] flooding processes
   - [X] linux oom killer
+* BONUS
+* Yak shaving
+It's turtles all the way down
+** Editors matter
+LSP is the new hotness
+
+#+begin_notes
+Microsoft Language Server Protocol
+
+What makes VSCode rock with Javascript
+#+end_notes
+** Alchemist.el
+#+begin_notes
+All-encompassing tool for emacs
+
+Tried to contribute, make some adjustments
+
+Eventually tried to rewrite backend
+
+Eventually just started a separate project only with LSP
+#+end_notes
+** Existing LSP projects
+- Marlus Saraiva's ~elixir_sense~
+- Jake Becker's ~elixir-ls~
+
+#+begin_notes
+
+elixir_sense is project analysis
+
+elixir-ls is an editor-independent LS client
+
+Both seemed "abandoned" - couldn't reach the authors
+#+end_notes
+** Created an org on Github
+https://github.com/elixir-lsp
+
+forked the projects, opened issues on original projects to explain why
+** Created channel on Elixir Slack
+elixir-lang.slack.com
+
+#language-server
+** Recruited folks
+** Eventually the author of elixir_sense joined
+Woot!
+** Community is active
+WOOT!
+** Last open loop
+Still haven't established communication with Jake Becker
+
+Please join us, Jake! We're so thankful for all the work you've done!
+
+#+begin_notes
+Very sad about this
+#+end_notes
+** And that's the story
+#+begin_quote
+All about how
+
+My life got flipped turned upside down
+
+And I'd like to take a minute just sit right there
+
+Tell you how I yak-shaved my way to a community of maintainers
+#+end_quote
 * Q&A
