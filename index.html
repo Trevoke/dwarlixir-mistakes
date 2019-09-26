@@ -28,15 +28,15 @@
 <div class="slides">
 
 <section>
-<section id="slide-org285a7ea">
-<h2 id="org285a7ea">Dwarlixir</h2>
+<section id="slide-org70d8b35">
+<h2 id="org70d8b35">Dwarlixir</h2>
 <p>
 A story of mistakes
-Dwarf Fortress + Elixir + MUD, oh my
 </p>
+
 </section>
-<section id="slide-org65ad33c">
-<h3 id="org65ad33c">Who you're listening to</h3>
+<section id="slide-org61a53c3">
+<h3 id="org61a53c3">Who you're listening to</h3>
 <p>
 Aldric "Trevoke" Giacomoni
 </p>
@@ -48,8 +48,8 @@ Aldric "Trevoke" Giacomoni
 
 </aside>
 </section>
-<section id="slide-org1887092">
-<h3 id="org1887092">Why this talk? 1/2</h3>
+<section id="slide-orge0bedf1">
+<h3 id="orge0bedf1">Why this talk? 1/2</h3>
 <blockquote nil>
 <p>
 I know it's everybody's sin
@@ -68,8 +68,8 @@ How to win
 </p>
 </blockquote>
 </section>
-<section id="slide-orgfc19d82">
-<h3 id="orgfc19d82">Why this talk? 2/2</h3>
+<section id="slide-org361d800">
+<h3 id="org361d800">Why this talk? 2/2</h3>
 <blockquote nil>
 <p>
 I look at the world and I notice it's turning
@@ -94,13 +94,17 @@ Still my guitar gently weeps
 </section>
 </section>
 <section>
-<section id="slide-orgfaf6aed">
-<h2 id="orgfaf6aed">Establishing context</h2>
-<div class="outline-text-2" id="text-orgfaf6aed">
-</div>
+<section id="slide-org75fd5e2">
+<h2 id="org75fd5e2">Establishing context</h2>
+<p>
+A mix of a MUD and Dwarf Fortress
+</p>
 </section>
-<section id="slide-org4c9381a">
-<h3 id="org4c9381a">What's a MUD?</h3>
+<section id="slide-org00102cb">
+<h3 id="org00102cb">What's a MUD?</h3>
+<img class="stretch" src="discworld.png">
+
+<aside class="notes">
 <p>
 Multi-User Dungeon
 Text-based multiplayer game
@@ -108,9 +112,15 @@ Read description
 Write commands
 Yes, text-based combat
 </p>
+
+</aside>
+
 </section>
-<section id="slide-org5372ecb">
-<h3 id="org5372ecb">What's Dwarf Fortress?</h3>
+<section id="slide-org7cf1ff0">
+<h3 id="org7cf1ff0">What's Dwarf Fortress?</h3>
+<img class="stretch" src="dwarf-fortress.png">
+
+<aside class="notes">
 <p>
 Dwarf Fortress!
 world simulation
@@ -118,11 +128,13 @@ What could possibly go wrong?
 ...
 Let's find out!
 </p>
+
+</aside>
 </section>
 </section>
 <section>
-<section id="slide-org75f9efa">
-<h2 id="org75f9efa">So what we're gonna aim for is…</h2>
+<section id="slide-orgf25f26a">
+<h2 id="orgf25f26a">So what we're gonna aim for is…</h2>
 <p>
 A world map, with time passing, creatures that can move, die, and reproduce.
 </p>
@@ -140,8 +152,8 @@ I'm sure that'll be easy
 </p>
 
 </section>
-<section id="slide-orgc663dc2">
-<h3 id="orgc663dc2">Roadmap</h3>
+<section id="slide-orgd42e777">
+<h3 id="orgd42e777">Roadmap</h3>
 <ul>
 <li><code>[0/6]</code>
 <ul>
@@ -158,19 +170,19 @@ I'm sure that'll be easy
 </section>
 </section>
 <section>
-<section id="slide-org64997aa">
-<h2 id="org64997aa">Algorithm improvement</h2>
-<div class="outline-text-2" id="text-org64997aa">
+<section id="slide-org028cd04">
+<h2 id="org028cd04">Algorithm improvement</h2>
+<div class="outline-text-2" id="text-org028cd04">
 </div>
 </section>
-<section id="slide-org271d7ab">
-<h3 id="org271d7ab">Misconception</h3>
+<section id="slide-orge01d6a4">
+<h3 id="orge01d6a4">Misconception</h3>
 <p>
 A list is like an array
 </p>
 </section>
-<section id="slide-org8bbef50">
-<h3 id="org8bbef50">Story</h3>
+<section id="slide-orgce400c3">
+<h3 id="orgce400c3">Story</h3>
 <img class="stretch" src="landoflisp.png">
 <aside class="notes">
 <p>
@@ -183,8 +195,8 @@ Grand Theft Wumpus
 
 </aside>
 </section>
-<section id="slide-orga21d377">
-<h3 id="orga21d377">Graph</h3>
+<section id="slide-orge7309ce">
+<h3 id="orge7309ce">Graph</h3>
 <img class="stretch" src="wumpus-map.png">
 
 <aside class="notes">
@@ -206,8 +218,8 @@ Then traverse and, if you find any islands, connect them.
 
 </aside>
 </section>
-<section id="slide-orgae5905a">
-<h3 id="orgae5905a">Impact</h3>
+<section id="slide-orgaa6d4d7">
+<h3 id="orgaa6d4d7">Impact</h3>
 <p>
 Lots of data structures initialized
 </p>
@@ -220,8 +232,8 @@ Lots of data being copied
 VERY SLOW
 </p>
 </section>
-<section id="slide-org9bcd1dc">
-<h3 id="org9bcd1dc">Fix</h3>
+<section id="slide-orga9ee14d">
+<h3 id="orga9ee14d">Fix</h3>
 <img class="stretch" src="algorithm-diff.png">
 <aside class="notes">
 <p>
@@ -240,8 +252,8 @@ y is a list of edges from this node
 
 </aside>
 </section>
-<section id="slide-org4318acc">
-<h3 id="org4318acc">Roadmap</h3>
+<section id="slide-org51469d5">
+<h3 id="org51469d5">Roadmap</h3>
 <ul>
 <li><code>[1/6]</code>
 <ul>
@@ -258,19 +270,19 @@ y is a list of edges from this node
 </section>
 </section>
 <section>
-<section id="slide-orgff5dcc9">
-<h2 id="orgff5dcc9">Extreme local state</h2>
-<div class="outline-text-2" id="text-orgff5dcc9">
+<section id="slide-org4f83687">
+<h2 id="org4f83687">Extreme local state</h2>
+<div class="outline-text-2" id="text-org4f83687">
 </div>
 </section>
-<section id="slide-orgebd93cb">
-<h3 id="orgebd93cb">Misconception</h3>
+<section id="slide-org4831eec">
+<h3 id="org4831eec">Misconception</h3>
 <p>
 extreme local state has got to be better than global state
 </p>
 </section>
-<section id="slide-orga2e8402">
-<h3 id="orga2e8402">Story</h3>
+<section id="slide-orga88d0cd">
+<h3 id="orga88d0cd">Story</h3>
 <p>
 "Actor model?" Moar like extreme object-oriented, amirite?
 </p>
@@ -283,20 +295,33 @@ extreme local state has got to be better than global state
 <li>"random action"</li>
 <li>Imagine the person can say "Nice hat" or "Nice Sunglasses"</li>
 <li>But they have to <i>check</i> first of course.</li>
-<li>So they send a synchronous message to other processes to check</li>
+<li>So they send a synchronous message to other processes to check what the state is</li>
+<li>But.. Other processes are all doing the same thing</li>
 
 </ul>
 
 </aside>
 </section>
-<section id="slide-org4bef1e3">
-<h3 id="org4bef1e3">Impact</h3>
+<section id="slide-org25a91c9">
+<h3 id="org25a91c9">Impact</h3>
+<p>
+A → B
+B → C
+C → A
+</p>
+
 <p>
 Deadlocks
 </p>
+<aside class="notes">
+<p>
+Think "Dining Philosophers" problem.
+</p>
+
+</aside>
 </section>
-<section id="slide-orgb42d63d">
-<h3 id="orgb42d63d">Fix</h3>
+<section id="slide-org15008db">
+<h3 id="org15008db">Fix 1</h3>
 <p>
 Some state is global.
 </p>
@@ -305,8 +330,14 @@ Some state is global.
 I know it's a boring answer.
 </p>
 </section>
-<section id="slide-org145748f">
-<h3 id="org145748f">Roadmap</h3>
+<section id="slide-org76d67c7">
+<h3 id="org76d67c7">Fix 2</h3>
+<p>
+Create
+</p>
+</section>
+<section id="slide-org7f68780">
+<h3 id="org7f68780">Roadmap</h3>
 <ul>
 <li><code>[2/6]</code>
 <ul>
@@ -323,25 +354,55 @@ I know it's a boring answer.
 </section>
 </section>
 <section>
-<section id="slide-orgb70d9c0">
-<h2 id="orgb70d9c0">Distributed state</h2>
-<div class="outline-text-2" id="text-orgb70d9c0">
+<section id="slide-org0ed8d1d">
+<h2 id="org0ed8d1d">Distributed state</h2>
+<div class="outline-text-2" id="text-org0ed8d1d">
 </div>
 </section>
-<section id="slide-org1c6480a">
-<h3 id="org1c6480a">Misconception</h3>
+<section id="slide-org9de40a2">
+<h3 id="org9de40a2">Misconception</h3>
 <p>
-I'm smart
+Fewer synchronous calls will reduce the opportunity of deadlocks
 </p>
 </section>
-<section id="slide-org69c7e10">
-<h3 id="org69c7e10">Impact</h3>
+<section id="slide-org214aca3">
+<h3 id="org214aca3">Story</h3>
 <p>
-Deadlocks
+Moar local state in moar local places
 </p>
+<aside class="notes">
+<p>
+I'd love to say that I figured out "some state is global" when I ran into the deadlocks
+</p>
+
+<p>
+But that's just not true. Ι really wanted to not do databases.
+</p>
+
+<p>
+So I started to copy some data into each process, because that allowed me to do fewer synchronous calls.
+</p>
+
+<p>
+Surely that was going to work, right?
+</p>
+
+</aside>
 </section>
-<section id="slide-orgff67327">
-<h3 id="orgff67327">Roadmap</h3>
+<section id="slide-org0f85fab">
+<h3 id="org0f85fab">Impact</h3>
+<p>
+Accidentally multiple sources of truths
+</p>
+<aside class="notes">
+<p>
+Because of super local
+</p>
+
+</aside>
+</section>
+<section id="slide-org05e450a">
+<h3 id="org05e450a">Roadmap</h3>
 <ul>
 <li><code>[3/6]</code>
 <ul>
@@ -358,23 +419,52 @@ Deadlocks
 </section>
 </section>
 <section>
-<section id="slide-org096fcb9">
-<h2 id="org096fcb9">Schedulers and the "tick"</h2>
-<div class="outline-text-2" id="text-org096fcb9">
+<section id="slide-orgbbcc787">
+<h2 id="orgbbcc787">Schedulers and the "tick"</h2>
+<div class="outline-text-2" id="text-orgbbcc787">
 </div>
 </section>
-<section id="slide-orgea98e65">
-<h3 id="orgea98e65">Misconception</h3>
+<section id="slide-orgcfe148a">
+<h3 id="orgcfe148a">Misconception</h3>
 <p>
 There won't be a sizable impact to sending lots of processes a message at the same time
 </p>
 </section>
-<section id="slide-org630f67d">
-<h3 id="org630f67d">Impact</h3>
+<section id="slide-orge46eed4">
+<h3 id="orge46eed4">Story</h3>
+<p>
+The tick (not the blue one)
+</p>
 
+<aside class="notes">
+<p>
+Registry, Petimer, self-ticks
+</p>
+
+</aside>
 </section>
-<section id="slide-orgc9c27b1">
-<h3 id="orgc9c27b1">Roadmap</h3>
+<section id="slide-org4f1f759">
+<h3 id="org4f1f759">Impact</h3>
+<p>
+All schedulers triggered at same time - literally a heartbeat of intense CPU usage on the box
+</p>
+</section>
+<section id="slide-orgfbbee62">
+<h3 id="orgfbbee62">Fix</h3>
+<p>
+More or less "any other way"
+</p>
+
+<p>
+I opted for "all manage their own ticks"
+</p>
+
+<p>
+Never mind how untestable that makes the system
+</p>
+</section>
+<section id="slide-org006c174">
+<h3 id="org006c174">Roadmap</h3>
 <ul>
 <li><code>[4/6]</code>
 <ul>
@@ -391,23 +481,23 @@ There won't be a sizable impact to sending lots of processes a message at the sa
 </section>
 </section>
 <section>
-<section id="slide-org48072f6">
-<h2 id="org48072f6">flooding processes</h2>
-<div class="outline-text-2" id="text-org48072f6">
+<section id="slide-org4549ea2">
+<h2 id="org4549ea2">flooding processes</h2>
+<div class="outline-text-2" id="text-org4549ea2">
 </div>
 </section>
-<section id="slide-org53fa89a">
-<h3 id="org53fa89a">Misconception</h3>
+<section id="slide-orgddc04cc">
+<h3 id="orgddc04cc">Misconception</h3>
 <p>
 It's hard to send a process too many messages
 </p>
 </section>
-<section id="slide-orge26ed15">
-<h3 id="orge26ed15">Impact</h3>
+<section id="slide-org5fbe76f">
+<h3 id="org5fbe76f">Impact</h3>
 
 </section>
-<section id="slide-orgdbb5379">
-<h3 id="orgdbb5379">Roadmap</h3>
+<section id="slide-org1715dec">
+<h3 id="org1715dec">Roadmap</h3>
 <ul>
 <li><code>[5/6]</code>
 <ul>
@@ -424,22 +514,47 @@ It's hard to send a process too many messages
 </section>
 </section>
 <section>
-<section id="slide-orgbd5c996">
-<h2 id="orgbd5c996">linux OOM killer</h2>
-<div class="outline-text-2" id="text-orgbd5c996">
+<section id="slide-orgedfd5de">
+<h2 id="orgedfd5de">linux OOM killer</h2>
+<div class="outline-text-2" id="text-orgedfd5de">
 </div>
 </section>
-<section id="slide-org5ecd82c">
-<h3 id="org5ecd82c">Misconception</h3>
+<section id="slide-orgb320f32">
+<h3 id="orgb320f32">Misconception</h3>
 <p>
 My world simulation won't grow unboundedly in RAM usage
 </p>
 </section>
-<section id="slide-org9b4ef72">
-<h3 id="org9b4ef72">Impact</h3>
+<section id="slide-org7a52347">
+<h3 id="org7a52347">Story</h3>
+<p>
+"Emergent Design"
+</p>
+<aside class="notes">
+<p>
+world simulation: reproduction and death
+</p>
+
+<p>
+balancing lifespan with likelihood of becoming pregnant and length of pregnancy is hard
+</p>
+
+</aside>
 </section>
-<section id="slide-orgb52004c">
-<h3 id="orgb52004c">Roadmap</h3>
+<section id="slide-org6b0a3f9">
+<h3 id="org6b0a3f9">Impact</h3>
+<p>
+The operating system does what it needs to do to stay up
+</p>
+<aside class="notes">
+<p>
+I'd launch the game, and after an hour and a half someone would say "Hey, your game is down"
+</p>
+
+</aside>
+</section>
+<section id="slide-org6fb4410">
+<h3 id="org6fb4410">Roadmap</h3>
 <ul>
 <li><code>[6/6]</code>
 <ul>
@@ -456,8 +571,8 @@ My world simulation won't grow unboundedly in RAM usage
 </section>
 </section>
 <section>
-<section id="slide-orgacaee63">
-<h2 id="orgacaee63">Q&amp;A</h2>
+<section id="slide-org2c2ad21">
+<h2 id="org2c2ad21">Q&amp;A</h2>
 </section>
 </section>
 </div>

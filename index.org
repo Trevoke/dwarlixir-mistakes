@@ -5,7 +5,7 @@
 
 * Dwarlixir
 A story of mistakes
-Dwarf Fortress + Elixir + MUD, oh my
+
 ** Who you're listening to
 Aldric "Trevoke" Giacomoni
 
@@ -35,18 +35,28 @@ Still my guitar gently weeps
 ― The Beatles, While My Guitar Gently Weeps
 #+end_quote
 * Establishing context
+A mix of a MUD and Dwarf Fortress
 ** What's a MUD?
+#+REVEAL_HTML: <img class="stretch" src="discworld.png">
+
+#+begin_notes
 Multi-User Dungeon
 Text-based multiplayer game
 Read description
 Write commands
 Yes, text-based combat
+#+end_notes
+
 ** What's Dwarf Fortress?
+#+REVEAL_HTML: <img class="stretch" src="dwarf-fortress.png">
+
+#+begin_notes
 Dwarf Fortress!
 world simulation
 What could possibly go wrong?
 ...
 Let's find out!
+#+end_notes
 * So what we're gonna aim for is…
 A world map, with time passing, creatures that can move, die, and reproduce.
 
@@ -67,6 +77,8 @@ I'm sure that'll be easy
 * Algorithm improvement
 ** Misconception
 A list is like an array
+
+AKA "what's the deal with immutability anyway?"
 ** Story
 #+REVEAL_HTML: <img class="stretch" src="landoflisp.png">
 #+begin_notes
