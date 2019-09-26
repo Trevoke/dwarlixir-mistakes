@@ -129,13 +129,14 @@ extreme local state has got to be better than global state
 - But.. Other processes are all doing the same thing
 #+end_notes
 ** Impact
-Think "Dining Philosophers" problem.
-
 A → B
 B → C
 C → A
 
 Deadlocks
+#+begin_notes
+Think "Dining Philosophers" problem.
+#+end_notes
 ** Fix 1
 Some state is global.
 
@@ -152,9 +153,23 @@ Create
   - [ ] linux oom killer
 * Distributed state
 ** Misconception
-I'm smart
+Fewer synchronous calls will reduce the opportunity of deadlocks
+** Story
+Moar local state in moar local places
+#+begin_notes
+I'd love to say that I figured out "some state is global" when I ran into the deadlocks
+
+But that's just not true. Ι really wanted to not do databases.
+
+So I started to copy some data into each process, because that allowed me to do fewer synchronous calls.
+
+Surely that was going to work, right?
+#+end_notes
 ** Impact
-Deadlocks
+Accidentally multiple sources of truths
+#+begin_notes
+Because of super local
+#+end_notes
 ** Roadmap
 - [3/6]
   - [X] algorithm improvement
@@ -166,8 +181,20 @@ Deadlocks
 * Schedulers and the "tick"
 ** Misconception
 There won't be a sizable impact to sending lots of processes a message at the same time
-** Impact
+** Story
+The tick (not the blue one)
 
+#+begin_notes
+Registry, Petimer, self-ticks
+#+end_notes
+** Impact
+All schedulers triggered at same time - literally a heartbeat of intense CPU usage on the box
+** Fix
+More or less "any other way"
+
+I opted for "all manage their own ticks"
+
+Never mind how untestable that makes the system
 ** Roadmap
 - [4/6]
   - [X] algorithm improvement
@@ -192,7 +219,18 @@ It's hard to send a process too many messages
 * linux OOM killer
 ** Misconception
 My world simulation won't grow unboundedly in RAM usage
+** Story
+"Emergent Design"
+#+begin_notes
+world simulation: reproduction and death
+
+balancing lifespan with likelihood of becoming pregnant and length of pregnancy is hard
+#+end_notes
 ** Impact
+The operating system does what it needs to do to stay up
+#+begin_notes
+I'd launch the game, and after an hour and a half someone would say "Hey, your game is down"
+#+end_notes
 ** Roadmap
 - [6/6]
   - [X] algorithm improvement
