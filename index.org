@@ -9,10 +9,15 @@ A story of mistakes
 ** Who you're listening to
 Aldric "Trevoke" Giacomoni
 
+Director of Engineering at Stash
 #+begin_notes
 <3 Ruby, Smalltalk，Lisp, Elixir
+
+Wrote code for about a decade
+
+<3 extreme programming, lean, agile...
 #+end_notes
-** Why this talk? 1/2
+** Why this talk?
 #+begin_quote
 I know it's everybody's sin
 
@@ -22,7 +27,20 @@ How to win
 
 ― Dream On, Aerosmith
 #+end_quote
-** Why this talk? 2/2
+
+#+begin_notes
+- never get to open with song lyrics
+- how cool am I?
+- two reasons
+- reason 1:
+- continuous improvement is critical
+- intentional experiments
+- failure
+- eventual success
+- In Radical Candor, Andy Grove says of Steve Jobs:
+"I didn't say Steve /is/ always right. I said he always /gets/ it right. Like anyone, he is wrong sometimes, but he insists, and not gently either, that people tell him when he's wrong, so he always gets it right in the end."
+#+end_notes
+** Why this talk?
 #+begin_quote
 I look at the world and I notice it's turning
 
@@ -34,6 +52,14 @@ Still my guitar gently weeps
 
 ― The Beatles, While My Guitar Gently Weeps
 #+end_quote
+
+#+begin_notes
+- reason 2:
+- impostor syndrome is a thing
+- I've got this fancy title now, but that's just the tip of the iceberg
+- Made plenty of mistakes
+- We learn well with stories
+#+end_notes
 * Establishing context
 A mix of a MUD and Dwarf Fortress
 ** What's a MUD?
@@ -54,17 +80,17 @@ Yes, text-based combat
 Dwarf Fortress!
 world simulation
 What could possibly go wrong?
-...
+
 Let's find out!
 #+end_notes
 * So what we're gonna aim for is…
-A world map, with time passing, creatures that can move, die, and reproduce.
-
-And a telnet connection for people
-
-And then I balance out the ecosystem
-
-I'm sure that'll be easy
+- A telnet connection for people
+- A world map
+- with time passing
+- creatures that can move
+- creatures that can die
+- creatures that can reproduce.
+- And then I balance out the ecosystem
 
 ** Roadmap
 - [0/6]
