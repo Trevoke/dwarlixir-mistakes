@@ -188,7 +188,7 @@ y is a list of edges from this node
 #+end_notes
 ** Roadmap
 - [1/6]
-  - [X] algorithm improvement
+  - [X] copying data structures is expensive
   - [ ] extreme local state
   - [ ] distributed state
   - [ ] schedulers and the "tick"
@@ -239,7 +239,7 @@ hot deploys
 #+end_notes
 ** Roadmap
 - [2/6]
-  - [X] algorithm improvement
+  - [X] copying data structures is expensive
   - [X] extreme local state
   - [ ] distributed state
   - [ ] schedulers and the "tick"
@@ -292,9 +292,9 @@ would give this a more serious shot today if I could
 #+end_notes
 ** Roadmap
 - [3/6]
-  - [X] algorithm improvement
-  - [X] extreme local state
-  - [X] distributed state
+  - [X] copying data structures is expensive
+  - [X] tell, don't ask
+  - [X] prefer a single source of truth
   - [ ] schedulers and the "tick"
   - [ ] flooding processes
   - [ ] linux oom killer
@@ -358,10 +358,10 @@ I wanted events
 #+end_notes
 ** Roadmap
 - [4/6]
-  - [X] algorithm improvement
-  - [X] extreme local state
-  - [X] distributed state
-  - [X] schedulers and the "tick"
+  - [X] copying data structures is expensive
+  - [X] tell, don't ask
+  - [X] prefer a single source of truth
+  - [X] know your system's CPU needs
   - [ ] flooding processes
   - [ ] linux oom killer
 * flooding processes
@@ -414,11 +414,11 @@ And that took me to a complete overhaul of the system
 #+end_notes
 ** Roadmap
 - [5/6]
-  - [X] algorithm improvement
-  - [X] extreme local state
-  - [X] distributed state
-  - [X] schedulers and the "tick"
-  - [X] flooding processes
+  - [X] copying data structures is expensive
+  - [X] tell, don't ask
+  - [X] prefer a single source of truth
+  - [X] know your system's CPU needs
+  - [X] actors are single-threaded
   - [ ] linux oom killer
 * linux OOM killer
 ** Misconception
@@ -444,7 +444,7 @@ kill non-essential processes using too much RAM
 
 We don't see this often because for the most part, the RAM that is "used" is actually free
 
-extreme local state: extreme local state
+tell, don't ask: tell, don't ask
 #+end_notes
 ** Fix
 Ecosystem
@@ -459,12 +459,12 @@ prod systems are so much more predictable
 #+end_notes
 ** Roadmap
 - [6/6]
-  - [X] algorithm improvement
-  - [X] extreme local state
-  - [X] distributed state
-  - [X] schedulers and the "tick"
-  - [X] flooding processes
-  - [X] linux oom killer
+  - [X] copying data structures is expensive
+  - [X] tell, don't ask
+  - [X] prefer a single source of truth
+  - [X] know your system's CPU needs
+  - [X] actors are single-threaded
+  - [X] know your system's RAM needs
 * BONUS
 * Yak shaving
 It's turtles all the way down
