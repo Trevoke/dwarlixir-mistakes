@@ -135,40 +135,27 @@ A list is like an array
 
 AKA "what's the deal with immutability anyway?"
 ** Story
-#+REVEAL_HTML: <img class="stretch" src="landoflisp.png">
-#+begin_notes
-Land of Lisp
+World: Graph → Edges and nodes
 
-Grand Theft Wumpus
-#+end_notes
-** Graph
-#+REVEAL_HTML: <img class="stretch" src="wumpus-map.png">
-
-#+begin_notes
-World: Graph
-
-Edges and nodes
-
-First, random generation of edges between pairs of nodes
-
-Then traverse original and, if you find any islands, connect them.
-
-SHIP IT!
-#+end_notes
+1. "nodes" are a list of numbers
+2. generate one edge to a random node from each node
+3. collect, breadth-first, into islands
+4. create bridges (single edges) between islands
 ** Key code
-This is within ~traverse/3~
 #+begin_src elixir
-Enum.flat_map(
-  edges_from_node,
-  fn({_source, destination}) -> traverse(destination,
-                                         edge_list,
-                                         visited_nodes)
+  def traverse(node, edge_list, visited) do
+    visited = [node | visited]
+    edges_from_node = direct_edges(node, edge_list)
+    Enum.flat_map(
+      edges_from_node,
+      fn({_s, dest}) -> traverse(dest, edge_list, visited) end
+    )
   end
-)
 #+end_src
 
 #+begin_notes
 flat_map is what we care about here
+We return nested lists!
 #+end_notes
 ** Impact
 Lots of data structures initialized recursively
@@ -240,7 +227,7 @@ hot deploys
 ** Roadmap
 - [2/6]
   - [X] copying data structures is expensive
-  - [X] extreme local state
+  - [X] tell, don't ask
   - [ ] distributed state
   - [ ] schedulers and the "tick"
   - [ ] flooding processes
@@ -273,10 +260,12 @@ Surely that was going to work, right?
 ** Impact
 Accidentally multiple sources of truths
 #+begin_notes
+I created caches. Caches are very hard to invalidate. It's one of the two hardest problems in programming, along with naming and off-by-one errors.
+
 two-phase commits; lock multiple processes to ensure synchronization
 #+end_notes
 ** Fix
-Some state is global
+Some state is global. Use a database.
 
 OR! Go look at erlmud
 
@@ -288,7 +277,7 @@ create a Hand process
 
 Means neither floor nor creature have to block because another process is starting the synchronous calls
 
-would give this a more serious shot today if I could
+would give this a more serious shot today if I had the time.
 #+end_notes
 ** Roadmap
 - [3/6]
@@ -299,7 +288,7 @@ would give this a more serious shot today if I could
   - [ ] flooding processes
   - [ ] linux oom killer
 * Schedulers and the "tick"
-#+REVEAL_HTML: <img class="stretch" src="gospers_glider_gun.gif">
+#+REVEAL_HTML: <img class="stretch" src="gameoflife.png">
 
 #+begin_notes
 "game of life"
@@ -307,7 +296,7 @@ would give this a more serious shot today if I could
 the "tick" is the unit of time: every time a tick happens, everything in the world happens
 #+end_notes
 ** Misconception
-There won't be a sizable impact to sending lots of processes a message at the same time
+There won't be a sizable impact to sending all my creatures a message at the same time
 
 #+begin_notes
 when the heartbeat happens every process acts
@@ -326,19 +315,15 @@ Pause life
 #+end_notes
 ** Impact
 All schedulers triggered at same time - literally a heartbeat of intense CPU usage on the box
-
+#+REVEAL_HTML: <img class="stretch" src="gol_utilization.png">
 #+begin_notes
 BEAM VM has a pre-emptive scheduler
 
-This means it coordinates the processes' actions
-
-This is done through something called "reductions"
-
-The scheduler allocates a set number of reductions to each process. Each action costs a certain number of reductions. When the number of reductions hits zero, the scheduler moves on to the next process.
+This means it coordinates the processes' actions, and that means it helps allocate CPU usage.
 
 for a game - heartbeat every 1-6 seconds
 
-So this was an incredibly regular cadence of CPU usage, but that also meant there was a clear bound to growth: at some point, CPUs wouldn't be able to allow every process to make their move at the same time.
+So this was an incredibly regular cadence of CPU usage, but that also meant there was a clear upper bound to growth: at some point, CPUs wouldn't be able to allow every process to make their move at the same time.
 #+end_notes
 ** Fix
 More or less "any other way"
@@ -366,7 +351,7 @@ I wanted events
   - [ ] linux oom killer
 * flooding processes
 ** Misconception
-It's hard to send a process too many messages
+It's hard to send a single process too many messages
 ** Story
 #+begin_notes
 - everything had its flow
@@ -379,16 +364,24 @@ It's hard to send a process too many messages
 - N^2 is bad.
 #+end_notes
 ** Impact
-The process that printed stuff to the console died
+The locations crashed
+
+The mobs crashed
+
+The process that printed stuff to the console crashed
 #+begin_notes
 
 What did it have to do?
 - create a string
 - send it over the network (telnet)
 
+I mentioned the pre-emptive scheduler before, here's how it works
+
 Processes have "Reductions"
 
-pre-emptive scheduler means processes only get so many actions before another process gets their turn
+From Prolog - goal reduction, a building block action of a larger operation
+
+pre-emptive scheduler means processes only get so many reductions before another process gets their turn
 
 sending a message gets more expensive as THE RECEIVING PROCESS has more messages in the mailbox
 
@@ -396,7 +389,7 @@ elements of self-balancing in the VM
 
 force rest of system to slow down to allow congestion to clear up
 
-Crucially: CPU time higher than time between messages
+Crucially in my case: CPU time higher than time between messages
 
 Processes are "single-threaded", process messages one at a time
 
@@ -435,23 +428,22 @@ balancing lifespan with likelihood of becoming pregnant and length of pregnancy 
 #+end_notes
 ** Impact
 The operating system does what it needs to do to stay up
+#+REVEAL_HTML: <img class="stretch" src="htop.png">
 #+begin_notes
 I'd launch the game, and after an hour and a half someone would say "Hey, your game is down"
 
 Linux has an out of memory killer
 
-kill non-essential processes using too much RAM
+kill non-essential OS-level processes using too much RAM
 
 We don't see this often because for the most part, the RAM that is "used" is actually free
-
-tell, don't ask: tell, don't ask
 #+end_notes
 ** Fix
 Ecosystem
 #+begin_notes
 I literally created an Elixir process that would check regularly how much RAM was available
 
-If less than 15% RAM was available, I'd stop births
+If less than 15% RAM was available, it would stop births
 
 If more than 20% RAM available, allow births
 
