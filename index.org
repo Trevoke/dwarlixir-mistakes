@@ -3,11 +3,38 @@
 #+REVEAL_THEME: solarized
 #+REVEAL_ROOT: ./reveal.js-3.8.0
 
+* feedback
+** everywhere: connect "fix" more clearly to the story
+** double up on the roadmap, transition to lesson?
+*** misconception vs lesson
+** "Misconceptions about Elixir" "while writing a game"
+** shorten intro / lose song lyrics? (or move to the end?)
+** mud/df descriptions could be shorter?
+** represent world generation more graphically
+** change foldl to reduce
+** context around BOTH map and reduce
+** better deadlock / images from game? or at least using dwarves
+** "tell don't ask" could use a diagram
+** explain dining philosophers / show slide?
+** flooding process: story slide is blank
+** cleaner difference between flooding a process and sending tons of messages
+** oom killer behavior -
+** add htop screenshots for memory usage
+** how did oom killer get diagnosed?
+** hand over the reins?
+** use "we" more?
+** self-deprecation may be too much?
+** impact slide: link is broken
+** explain LSP?
+** hey Jake, if you're out there..?
+
 * Dwarlixir
 A story of mistakes
 
 ** Who you're listening to
-Aldric "Trevoke" Giacomoni
+Aldric Giacomoni
+
+~@trevoke~
 
 Director of Engineering at Stash
 #+begin_notes
@@ -98,11 +125,11 @@ Let's find out!
 * So what we're gonna aim for is…
 - A telnet connection for people
 - A world map
-- with time passing
-- creatures that can move
-- creatures that can die
-- creatures that can reproduce.
-- And then I balance out the ecosystem
+- With time passing
+- Creatures that can move
+- Creatures that can die
+- Creatures that can reproduce
+- Balancing out the ecosystem
 ** I am not a game designer
 Nothing here constitutes *good* advice.
 
@@ -220,9 +247,17 @@ I know it's a boring answer.
 #+begin_notes
 choices for where the state goes
 
-the big elixir last year
-"stateful servers"
 hot deploys
+basically inject code in running application, Erlang provides hooks for upgrading state
+
+But that's a whole other talk
+
+
+the big elixir last year
+
+Desmond Bowe gave a talk about "stateful servers"
+
+Highly recommended
 #+end_notes
 ** Roadmap
 - [2/6]
@@ -255,7 +290,6 @@ But that's just not true. Ι really wanted to not do databases.
 
 So I started to copy some data into each process, because that allowed me to do fewer synchronous calls.
 
-Surely that was going to work, right?
 #+end_notes
 ** Impact
 Accidentally multiple sources of truths
@@ -315,7 +349,7 @@ Pause life
 #+end_notes
 ** Impact
 All schedulers triggered at same time - literally a heartbeat of intense CPU usage on the box
-#+REVEAL_HTML: <img class="stretch" src="gol_utilization.png">
+#+REVEAL_HTML: <img class="stretch" src="scheduler.png">
 #+begin_notes
 BEAM VM has a pre-emptive scheduler
 
@@ -353,6 +387,7 @@ I wanted events
 ** Misconception
 It's hard to send a single process too many messages
 ** Story
+O(N²) is bad
 #+begin_notes
 - everything had its flow
 - "events" would rule
@@ -415,7 +450,7 @@ And that took me to a complete overhaul of the system
   - [ ] linux oom killer
 * linux OOM killer
 ** Misconception
-My world simulation won't grow unboundedly in RAM usage
+My world simulation won't grow unbounded in RAM usage
 #+begin_notes
 remember when Ι said I would balance the ecosystem?
 #+end_notes

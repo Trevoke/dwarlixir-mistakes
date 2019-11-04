@@ -28,17 +28,100 @@
 <div class="slides">
 
 <section>
-<section id="slide-orge7d7b2a">
-<h2 id="orge7d7b2a">Dwarlixir</h2>
+<section id="slide-org1a79983">
+<h2 id="org1a79983">feedback</h2>
+<div class="outline-text-2" id="text-org1a79983">
+</div>
+</section>
+<section id="slide-org66f1af3">
+<h3 id="org66f1af3">everywhere: connect "fix" more clearly to the story</h3>
+</section>
+<section id="slide-org20038ca">
+<h3 id="org20038ca">double up on the roadmap, transition to lesson?</h3>
+<div class="outline-text-3" id="text-org20038ca">
+</div>
+</section>
+<section id="slide-org5ca0479">
+<h4 id="org5ca0479">misconception vs lesson</h4>
+</section>
+<section id="slide-org50781e0">
+<h3 id="org50781e0">"Misconceptions about Elixir" "while writing a game"</h3>
+</section>
+<section id="slide-org3d4fb13">
+<h3 id="org3d4fb13">shorten intro / lose song lyrics? (or move to the end?)</h3>
+</section>
+<section id="slide-org17a6e11">
+<h3 id="org17a6e11">mud/df descriptions could be shorter?</h3>
+</section>
+<section id="slide-orgc5a36d2">
+<h3 id="orgc5a36d2">represent world generation more graphically</h3>
+</section>
+<section id="slide-org57219db">
+<h3 id="org57219db">change foldl to reduce</h3>
+</section>
+<section id="slide-org5f8fadd">
+<h3 id="org5f8fadd">context around BOTH map and reduce</h3>
+</section>
+<section id="slide-org524f766">
+<h3 id="org524f766">better deadlock / images from game? or at least using dwarves</h3>
+</section>
+<section id="slide-orgb403728">
+<h3 id="orgb403728">"tell don't ask" could use a diagram</h3>
+</section>
+<section id="slide-orgb147a4f">
+<h3 id="orgb147a4f">explain dining philosophers / show slide?</h3>
+</section>
+<section id="slide-org6a51952">
+<h3 id="org6a51952">flooding process: story slide is blank</h3>
+</section>
+<section id="slide-orgd65ce8e">
+<h3 id="orgd65ce8e">cleaner difference between flooding a process and sending tons of messages</h3>
+</section>
+<section id="slide-org3645547">
+<h3 id="org3645547">oom killer behavior -</h3>
+</section>
+<section id="slide-org8933be6">
+<h3 id="org8933be6">add htop screenshots for memory usage</h3>
+</section>
+<section id="slide-orgf1ca665">
+<h3 id="orgf1ca665">how did oom killer get diagnosed?</h3>
+</section>
+<section id="slide-orgeaaa8c3">
+<h3 id="orgeaaa8c3">hand over the reins?</h3>
+</section>
+<section id="slide-org2beb478">
+<h3 id="org2beb478">use "we" more?</h3>
+</section>
+<section id="slide-org837010e">
+<h3 id="org837010e">self-deprecation may be too much?</h3>
+</section>
+<section id="slide-org8f340f9">
+<h3 id="org8f340f9">impact slide: link is broken</h3>
+</section>
+<section id="slide-org2a24347">
+<h3 id="org2a24347">explain LSP?</h3>
+</section>
+<section id="slide-orge405cac">
+<h3 id="orge405cac">hey Jake, if you're out there..?</h3>
+
+</section>
+</section>
+<section>
+<section id="slide-org85e5d70">
+<h2 id="org85e5d70">Dwarlixir</h2>
 <p>
 A story of mistakes
 </p>
 
 </section>
-<section id="slide-org9014a71">
-<h3 id="org9014a71">Who you're listening to</h3>
+<section id="slide-orgb11a3b0">
+<h3 id="orgb11a3b0">Who you're listening to</h3>
 <p>
-Aldric "Trevoke" Giacomoni
+Aldric Giacomoni
+</p>
+
+<p>
+<code>@trevoke</code>
 </p>
 
 <p>
@@ -59,8 +142,8 @@ Wrote code for about a decade
 
 </aside>
 </section>
-<section id="slide-orgcc2b656">
-<h3 id="orgcc2b656">Why this talk?</h3>
+<section id="slide-org2b1843b">
+<h3 id="org2b1843b">Why this talk?</h3>
 <blockquote nil>
 <p>
 I know it's everybody's sin
@@ -98,8 +181,8 @@ How to win
 
 </aside>
 </section>
-<section id="slide-org5f85e12">
-<h3 id="org5f85e12">Why this talk?</h3>
+<section id="slide-org5d6f12f">
+<h3 id="org5d6f12f">Why this talk?</h3>
 <blockquote nil>
 <p>
 I look at the world and I notice it's turning
@@ -136,14 +219,14 @@ Still my guitar gently weeps
 </section>
 </section>
 <section>
-<section id="slide-org67cd8f6">
-<h2 id="org67cd8f6">Establishing context</h2>
+<section id="slide-orge2719a0">
+<h2 id="orge2719a0">Establishing context</h2>
 <p>
 A mix of a MUD and Dwarf Fortress
 </p>
 </section>
-<section id="slide-orgb6fa9fe">
-<h3 id="orgb6fa9fe">What's a MUD?</h3>
+<section id="slide-orgf8aa9bb">
+<h3 id="orgf8aa9bb">What's a MUD?</h3>
 <img class="stretch" src="discworld.png">
 
 <aside class="notes">
@@ -174,8 +257,8 @@ telnet / web
 </aside>
 
 </section>
-<section id="slide-org8e716d9">
-<h3 id="org8e716d9">What's Dwarf Fortress?</h3>
+<section id="slide-org5ceee25">
+<h3 id="org5ceee25">What's Dwarf Fortress?</h3>
 <img class="stretch" src="dwarf-fortress.png">
 
 <aside class="notes">
@@ -207,21 +290,21 @@ Let's find out!
 </section>
 </section>
 <section>
-<section id="slide-org7ae9cc0">
-<h2 id="org7ae9cc0">So what we're gonna aim for is…</h2>
+<section id="slide-orga786f20">
+<h2 id="orga786f20">So what we're gonna aim for is…</h2>
 <ul>
 <li>A telnet connection for people</li>
 <li>A world map</li>
-<li>with time passing</li>
-<li>creatures that can move</li>
-<li>creatures that can die</li>
-<li>creatures that can reproduce.</li>
-<li>And then I balance out the ecosystem</li>
+<li>With time passing</li>
+<li>Creatures that can move</li>
+<li>Creatures that can die</li>
+<li>Creatures that can reproduce</li>
+<li>Balancing out the ecosystem</li>
 
 </ul>
 </section>
-<section id="slide-orgd33ceae">
-<h3 id="orgd33ceae">I am not a game designer</h3>
+<section id="slide-orge6d1a60">
+<h3 id="orge6d1a60">I am not a game designer</h3>
 <p>
 Nothing here constitutes <b>good</b> advice.
 </p>
@@ -230,8 +313,8 @@ Nothing here constitutes <b>good</b> advice.
 Seriously.
 </p>
 </section>
-<section id="slide-org75fc916">
-<h3 id="org75fc916">Roadmap</h3>
+<section id="slide-org6a3c3a9">
+<h3 id="org6a3c3a9">Roadmap</h3>
 <ul>
 <li><code>[0/6]</code>
 <ul>
@@ -275,13 +358,13 @@ linux protects itself
 </section>
 </section>
 <section>
-<section id="slide-org9904a09">
-<h2 id="org9904a09">Algorithm improvement</h2>
-<div class="outline-text-2" id="text-org9904a09">
+<section id="slide-orgb36fd19">
+<h2 id="orgb36fd19">Algorithm improvement</h2>
+<div class="outline-text-2" id="text-orgb36fd19">
 </div>
 </section>
-<section id="slide-org16dade8">
-<h3 id="org16dade8">Misconception</h3>
+<section id="slide-org4e04d8d">
+<h3 id="org4e04d8d">Misconception</h3>
 <p>
 A list is like an array
 </p>
@@ -290,8 +373,8 @@ A list is like an array
 AKA "what's the deal with immutability anyway?"
 </p>
 </section>
-<section id="slide-org2240da4">
-<h3 id="org2240da4">Story</h3>
+<section id="slide-orgaaecdb6">
+<h3 id="orgaaecdb6">Story</h3>
 <p>
 World: Graph → Edges and nodes
 </p>
@@ -304,18 +387,18 @@ World: Graph → Edges and nodes
 
 </ol>
 </section>
-<section id="slide-org5dcb155">
-<h3 id="org5dcb155">Key code</h3>
+<section id="slide-orga84d957">
+<h3 id="orga84d957">Key code</h3>
 <div class="org-src-container">
 
-<pre  class="src src-elixir"><code trim><span style="color: #3a5ca6;">def</span> <span style="color: #f2650d;">traverse</span>(node, edge_list, visited) <span style="color: #3a5ca6;">do</span>
-  <span style="color: #110349;">visited</span> = [node | visited]
-  <span style="color: #110349;">edges_from_node</span> = direct_edges(node, edge_list)
-  <span style="color: #b54f30;">Enum</span>.flat_map(
-    edges_from_node,
-    <span style="color: #3a5ca6;">fn</span>({<span style="color: #525252; font-style: italic;">_s</span>, dest}) -&gt; traverse(dest, edge_list, visited) <span style="color: #3a5ca6;">end</span>
-  )
-<span style="color: #3a5ca6;">end</span>
+<pre  class="src src-elixir"><code trim><span style="color: #597bc5;">def</span> <span style="color: #f9cf80;">traverse</span>(node, edge_list, visited) <span style="color: #597bc5;">do</span>&#57344;&#57345;&#57345;
+  <span style="color: #c6b8fc;">visited</span> = [node | visited]&#57344;&#57345;&#57345;
+  <span style="color: #c6b8fc;">edges_from_node</span> = direct_edges(node, edge_list)&#57344;&#57345;&#57345;
+  <span style="color: #fdb86b;">Enum</span>.flat_map(&#57344;&#57345;&#57345;
+    edges_from_node,&#57344;&#57345;&#57345;
+    <span style="color: #597bc5;">fn</span>({<span style="color: #616161;">_s</span>, dest}) -&gt; traverse(dest, edge_list, visited) <span style="color: #597bc5;">end</span>&#57344;&#57345;&#57345;
+  )&#57344;&#57345;&#57345;
+<span style="color: #597bc5;">end</span>
 </code></pre>
 </div>
 
@@ -327,8 +410,8 @@ We return nested lists!
 
 </aside>
 </section>
-<section id="slide-org871c569">
-<h3 id="org871c569">Impact</h3>
+<section id="slide-org310aaf8">
+<h3 id="org310aaf8">Impact</h3>
 <p>
 Lots of data structures initialized recursively
 </p>
@@ -341,8 +424,8 @@ Lots of data being copied when flattening
 VERY SLOW
 </p>
 </section>
-<section id="slide-org2c04ed8">
-<h3 id="org2c04ed8">Fix</h3>
+<section id="slide-org575d2b0">
+<h3 id="org575d2b0">Fix</h3>
 <img class="stretch" src="algorithm-diff.png">
 
 <aside class="notes">
@@ -360,8 +443,8 @@ y is a list of edges from this node
 
 </aside>
 </section>
-<section id="slide-org85cd1b7">
-<h3 id="org85cd1b7">Roadmap</h3>
+<section id="slide-org2441ade">
+<h3 id="org2441ade">Roadmap</h3>
 <ul>
 <li><code>[1/6]</code>
 <ul>
@@ -378,13 +461,13 @@ y is a list of edges from this node
 </section>
 </section>
 <section>
-<section id="slide-org2956e15">
-<h2 id="org2956e15">Extreme local state</h2>
-<div class="outline-text-2" id="text-org2956e15">
+<section id="slide-orgd56e33f">
+<h2 id="orgd56e33f">Extreme local state</h2>
+<div class="outline-text-2" id="text-orgd56e33f">
 </div>
 </section>
-<section id="slide-orgf421e81">
-<h3 id="orgf421e81">Misconception</h3>
+<section id="slide-org07b1dfb">
+<h3 id="org07b1dfb">Misconception</h3>
 <p>
 extreme local state has got to be better than global state
 </p>
@@ -396,8 +479,8 @@ Alan Kay once said, "OOP to me means only messaging, local retention, and protec
 
 </aside>
 </section>
-<section id="slide-orgc5e2e73">
-<h3 id="orgc5e2e73">Story</h3>
+<section id="slide-org6331b06">
+<h3 id="org6331b06">Story</h3>
 <p>
 "Actor model?" Moar like extreme object-oriented, amirite?
 </p>
@@ -417,8 +500,8 @@ Alan Kay once said, "OOP to me means only messaging, local retention, and protec
 
 </aside>
 </section>
-<section id="slide-orga349f17">
-<h3 id="orga349f17">Impact</h3>
+<section id="slide-org6520192">
+<h3 id="org6520192">Impact</h3>
 <p>
 A → B
 </p>
@@ -441,8 +524,8 @@ Think "Dining Philosophers" problem.
 
 </aside>
 </section>
-<section id="slide-orgc28e7d4">
-<h3 id="orgc28e7d4">Fix</h3>
+<section id="slide-orgd9d3841">
+<h3 id="orgd9d3841">Fix</h3>
 <p>
 Some state is global.
 </p>
@@ -457,15 +540,31 @@ choices for where the state goes
 </p>
 
 <p>
-the big elixir last year
-"stateful servers"
 hot deploys
+basically inject code in running application, Erlang provides hooks for upgrading state
+</p>
+
+<p>
+But that's a whole other talk
+</p>
+
+
+<p>
+the big elixir last year
+</p>
+
+<p>
+Desmond Bowe gave a talk about "stateful servers"
+</p>
+
+<p>
+Highly recommended
 </p>
 
 </aside>
 </section>
-<section id="slide-org15be253">
-<h3 id="org15be253">Roadmap</h3>
+<section id="slide-orge859d37">
+<h3 id="orge859d37">Roadmap</h3>
 <ul>
 <li><code>[2/6]</code>
 <ul>
@@ -482,8 +581,8 @@ hot deploys
 </section>
 </section>
 <section>
-<section id="slide-org57ff2ea">
-<h2 id="org57ff2ea">Distributed state</h2>
+<section id="slide-orgfdbab90">
+<h2 id="orgfdbab90">Distributed state</h2>
 <aside class="notes">
 <p>
 wish Ι could say I figured out the "global state"
@@ -491,8 +590,8 @@ wish Ι could say I figured out the "global state"
 
 </aside>
 </section>
-<section id="slide-orgac51f40">
-<h3 id="orgac51f40">Misconception</h3>
+<section id="slide-org5cf506c">
+<h3 id="org5cf506c">Misconception</h3>
 <p>
 Fewer synchronous calls will reduce the opportunity of deadlocks
 </p>
@@ -511,8 +610,8 @@ which synchronous calls, not how many
 
 </aside>
 </section>
-<section id="slide-org8638005">
-<h3 id="org8638005">Story</h3>
+<section id="slide-orgf955131">
+<h3 id="orgf955131">Story</h3>
 <p>
 Moar local state in moar local places
 </p>
@@ -529,14 +628,10 @@ But that's just not true. Ι really wanted to not do databases.
 So I started to copy some data into each process, because that allowed me to do fewer synchronous calls.
 </p>
 
-<p>
-Surely that was going to work, right?
-</p>
-
 </aside>
 </section>
-<section id="slide-org29ca4e3">
-<h3 id="org29ca4e3">Impact</h3>
+<section id="slide-org7dc48e5">
+<h3 id="org7dc48e5">Impact</h3>
 <p>
 Accidentally multiple sources of truths
 </p>
@@ -551,8 +646,8 @@ two-phase commits; lock multiple processes to ensure synchronization
 
 </aside>
 </section>
-<section id="slide-org8536169">
-<h3 id="org8536169">Fix</h3>
+<section id="slide-org30c7b22">
+<h3 id="org30c7b22">Fix</h3>
 <p>
 Some state is global. Use a database.
 </p>
@@ -583,8 +678,8 @@ would give this a more serious shot today if I had the time.
 
 </aside>
 </section>
-<section id="slide-org4c91cf6">
-<h3 id="org4c91cf6">Roadmap</h3>
+<section id="slide-org6a01847">
+<h3 id="org6a01847">Roadmap</h3>
 <ul>
 <li><code>[3/6]</code>
 <ul>
@@ -601,8 +696,8 @@ would give this a more serious shot today if I had the time.
 </section>
 </section>
 <section>
-<section id="slide-orgd99c5bc">
-<h2 id="orgd99c5bc">Schedulers and the "tick"</h2>
+<section id="slide-org41cf3c4">
+<h2 id="org41cf3c4">Schedulers and the "tick"</h2>
 <img class="stretch" src="gameoflife.png">
 
 <aside class="notes">
@@ -616,8 +711,8 @@ the "tick" is the unit of time: every time a tick happens, everything in the wor
 
 </aside>
 </section>
-<section id="slide-org0faa659">
-<h3 id="org0faa659">Misconception</h3>
+<section id="slide-org055521c">
+<h3 id="org055521c">Misconception</h3>
 <p>
 There won't be a sizable impact to sending all my creatures a message at the same time
 </p>
@@ -629,8 +724,8 @@ when the heartbeat happens every process acts
 
 </aside>
 </section>
-<section id="slide-orgaeb08a8">
-<h3 id="orgaeb08a8">Story</h3>
+<section id="slide-org526cc16">
+<h3 id="org526cc16">Story</h3>
 <p>
 The tick (not the blue one)
 </p>
@@ -654,12 +749,12 @@ Pause life
 
 </aside>
 </section>
-<section id="slide-orgeaa1fdd">
-<h3 id="orgeaa1fdd">Impact</h3>
+<section id="slide-orgde1ad41">
+<h3 id="orgde1ad41">Impact</h3>
 <p>
 All schedulers triggered at same time - literally a heartbeat of intense CPU usage on the box
 </p>
-<img class="stretch" src="gol_utilization.png">
+<img class="stretch" src="scheduler.png">
 <aside class="notes">
 <p>
 BEAM VM has a pre-emptive scheduler
@@ -679,8 +774,8 @@ So this was an incredibly regular cadence of CPU usage, but that also meant ther
 
 </aside>
 </section>
-<section id="slide-orgefd66b0">
-<h3 id="orgefd66b0">Fix</h3>
+<section id="slide-orgefaa09e">
+<h3 id="orgefaa09e">Fix</h3>
 <p>
 More or less "any other way"
 </p>
@@ -712,8 +807,8 @@ I wanted events
 
 </aside>
 </section>
-<section id="slide-orge40c29a">
-<h3 id="orge40c29a">Roadmap</h3>
+<section id="slide-orgd6e29c8">
+<h3 id="orgd6e29c8">Roadmap</h3>
 <ul>
 <li><code>[4/6]</code>
 <ul>
@@ -730,19 +825,22 @@ I wanted events
 </section>
 </section>
 <section>
-<section id="slide-orgb07938f">
-<h2 id="orgb07938f">flooding processes</h2>
-<div class="outline-text-2" id="text-orgb07938f">
+<section id="slide-orgd538ccd">
+<h2 id="orgd538ccd">flooding processes</h2>
+<div class="outline-text-2" id="text-orgd538ccd">
 </div>
 </section>
-<section id="slide-org93099bb">
-<h3 id="org93099bb">Misconception</h3>
+<section id="slide-orgd45af6c">
+<h3 id="orgd45af6c">Misconception</h3>
 <p>
 It's hard to send a single process too many messages
 </p>
 </section>
-<section id="slide-org6451305">
-<h3 id="org6451305">Story</h3>
+<section id="slide-org4f1c4c8">
+<h3 id="org4f1c4c8">Story</h3>
+<p>
+O(N²) is bad
+</p>
 <aside class="notes">
 <ul>
 <li>everything had its flow</li>
@@ -758,8 +856,8 @@ It's hard to send a single process too many messages
 
 </aside>
 </section>
-<section id="slide-org87eec5d">
-<h3 id="org87eec5d">Impact</h3>
+<section id="slide-orgb3049af">
+<h3 id="orgb3049af">Impact</h3>
 <p>
 The locations crashed
 </p>
@@ -827,8 +925,8 @@ Possibly constructing strings instead of IO strings made things worse
 
 </aside>
 </section>
-<section id="slide-org6b008cd">
-<h3 id="org6b008cd">Fix</h3>
+<section id="slide-orge97d178">
+<h3 id="orge97d178">Fix</h3>
 <p>
 Batch messages
 </p>
@@ -847,8 +945,8 @@ And that took me to a complete overhaul of the system
 
 </aside>
 </section>
-<section id="slide-org18f3a36">
-<h3 id="org18f3a36">Roadmap</h3>
+<section id="slide-org5a34d18">
+<h3 id="org5a34d18">Roadmap</h3>
 <ul>
 <li><code>[5/6]</code>
 <ul>
@@ -865,15 +963,15 @@ And that took me to a complete overhaul of the system
 </section>
 </section>
 <section>
-<section id="slide-org0756ae7">
-<h2 id="org0756ae7">linux OOM killer</h2>
-<div class="outline-text-2" id="text-org0756ae7">
+<section id="slide-org2f1e73b">
+<h2 id="org2f1e73b">linux OOM killer</h2>
+<div class="outline-text-2" id="text-org2f1e73b">
 </div>
 </section>
-<section id="slide-orgc5bef1b">
-<h3 id="orgc5bef1b">Misconception</h3>
+<section id="slide-orga5df29d">
+<h3 id="orga5df29d">Misconception</h3>
 <p>
-My world simulation won't grow unboundedly in RAM usage
+My world simulation won't grow unbounded in RAM usage
 </p>
 <aside class="notes">
 <p>
@@ -882,8 +980,8 @@ remember when Ι said I would balance the ecosystem?
 
 </aside>
 </section>
-<section id="slide-orgb62dfc4">
-<h3 id="orgb62dfc4">Story</h3>
+<section id="slide-org069f69c">
+<h3 id="org069f69c">Story</h3>
 <p>
 "Emergent Behavior"
 </p>
@@ -898,8 +996,8 @@ balancing lifespan with likelihood of becoming pregnant and length of pregnancy 
 
 </aside>
 </section>
-<section id="slide-orgadd47e5">
-<h3 id="orgadd47e5">Impact</h3>
+<section id="slide-org46a17dc">
+<h3 id="org46a17dc">Impact</h3>
 <p>
 The operating system does what it needs to do to stay up
 </p>
@@ -923,8 +1021,8 @@ We don't see this often because for the most part, the RAM that is "used" is act
 
 </aside>
 </section>
-<section id="slide-orgf3c8bc5">
-<h3 id="orgf3c8bc5">Fix</h3>
+<section id="slide-org0ad1ead">
+<h3 id="org0ad1ead">Fix</h3>
 <p>
 Ecosystem
 </p>
@@ -947,8 +1045,8 @@ prod systems are so much more predictable
 
 </aside>
 </section>
-<section id="slide-org3ace848">
-<h3 id="org3ace848">Roadmap</h3>
+<section id="slide-orga0c8bff">
+<h3 id="orga0c8bff">Roadmap</h3>
 <ul>
 <li><code>[6/6]</code>
 <ul>
@@ -965,19 +1063,19 @@ prod systems are so much more predictable
 </section>
 </section>
 <section>
-<section id="slide-orgbfb467d">
-<h2 id="orgbfb467d">BONUS</h2>
+<section id="slide-org13d039f">
+<h2 id="org13d039f">BONUS</h2>
 </section>
 </section>
 <section>
-<section id="slide-org0e20d14">
-<h2 id="org0e20d14">Yak shaving</h2>
+<section id="slide-org4b626ac">
+<h2 id="org4b626ac">Yak shaving</h2>
 <p>
 It's turtles all the way down
 </p>
 </section>
-<section id="slide-org1bb89d0">
-<h3 id="org1bb89d0">Editors matter</h3>
+<section id="slide-orgebecf49">
+<h3 id="orgebecf49">Editors matter</h3>
 <p>
 LSP is the new hotness
 </p>
@@ -993,8 +1091,8 @@ What makes VSCode rock with Javascript
 
 </aside>
 </section>
-<section id="slide-org0e810f1">
-<h3 id="org0e810f1">Alchemist.el</h3>
+<section id="slide-orgb53d76e">
+<h3 id="orgb53d76e">Alchemist.el</h3>
 <aside class="notes">
 <p>
 All-encompassing tool for emacs
@@ -1014,8 +1112,8 @@ Eventually just started a separate project only with LSP
 
 </aside>
 </section>
-<section id="slide-org12e7e2c">
-<h3 id="org12e7e2c">Existing LSP projects</h3>
+<section id="slide-org1ad51f8">
+<h3 id="org1ad51f8">Existing LSP projects</h3>
 <ul>
 <li>Marlus Saraiva's <code>elixir_sense</code></li>
 <li>Jake Becker's <code>elixir-ls</code></li>
@@ -1041,8 +1139,8 @@ Both seemed "abandoned" - couldn't reach the authors
 
 </aside>
 </section>
-<section id="slide-org9bb50de">
-<h3 id="org9bb50de">Created an org on Github</h3>
+<section id="slide-orge012c81">
+<h3 id="orge012c81">Created an org on Github</h3>
 <p>
 <a href="https://github.com/elixir-lsp">https://github.com/elixir-lsp</a>
 </p>
@@ -1051,8 +1149,8 @@ Both seemed "abandoned" - couldn't reach the authors
 forked the projects, opened issues on original projects to explain why
 </p>
 </section>
-<section id="slide-org6c66ed4">
-<h3 id="org6c66ed4">Created channel on Elixir Slack</h3>
+<section id="slide-org8581658">
+<h3 id="org8581658">Created channel on Elixir Slack</h3>
 <p>
 elixir-lang.slack.com
 </p>
@@ -1061,23 +1159,23 @@ elixir-lang.slack.com
 #language-server
 </p>
 </section>
-<section id="slide-org4293630">
-<h3 id="org4293630">Recruited folks</h3>
+<section id="slide-org6c7182d">
+<h3 id="org6c7182d">Recruited folks</h3>
 </section>
-<section id="slide-org3847427">
-<h3 id="org3847427">Eventually the author of elixir_sense joined</h3>
+<section id="slide-orgfe53e6d">
+<h3 id="orgfe53e6d">Eventually the author of elixir_sense joined</h3>
 <p>
 Woot!
 </p>
 </section>
-<section id="slide-orgb04d1d4">
-<h3 id="orgb04d1d4">Community is active</h3>
+<section id="slide-orga9da32a">
+<h3 id="orga9da32a">Community is active</h3>
 <p>
 WOOT!
 </p>
 </section>
-<section id="slide-org2ad86b9">
-<h3 id="org2ad86b9">Last open loop</h3>
+<section id="slide-orga503e68">
+<h3 id="orga503e68">Last open loop</h3>
 <p>
 Still haven't established communication with Jake Becker
 </p>
@@ -1093,8 +1191,8 @@ Very sad about this
 
 </aside>
 </section>
-<section id="slide-orgb4ab9c8">
-<h3 id="orgb4ab9c8">And that's the story</h3>
+<section id="slide-org4ce5649">
+<h3 id="org4ce5649">And that's the story</h3>
 <blockquote nil>
 <p>
 All about how
@@ -1115,8 +1213,8 @@ Tell you how I yak-shaved my way to a community of maintainers
 </section>
 </section>
 <section>
-<section id="slide-orge13804f">
-<h2 id="orge13804f">Q&amp;A</h2>
+<section id="slide-orga681d90">
+<h2 id="orga681d90">Q&amp;A</h2>
 </section>
 </section>
 </div>
