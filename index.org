@@ -494,7 +494,7 @@ prod systems are so much more predictable
   - [X] know your system's RAM needs
 * BONUS
 * Yak shaving
-It's turtles all the way down
+It's yaks all the way down
 ** Editors matter
 LSP is the new hotness
 
