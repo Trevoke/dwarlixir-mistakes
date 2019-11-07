@@ -72,3 +72,133 @@ Archived entries from file /Users/trevoke/src/projects/dwarlixir-mistakes/index.
   :ARCHIVE_CATEGORY: index
   :ARCHIVE_TODO: DONE
   :END:
+
+* DONE how did oom killer get diagnosed?
+CLOSED: [2019-11-07 Thu 08:34]
+:PROPERTIES:
+:ARCHIVE_TIME: 2019-11-07 Thu 08:34
+:ARCHIVE_FILE: ~/src/projects/dwarlixir-mistakes/index.org
+:ARCHIVE_OLPATH: feedback
+:ARCHIVE_CATEGORY: index
+:ARCHIVE_TODO: DONE
+:END:
+
+* DONE oom killer behavior -
+CLOSED: [2019-11-07 Thu 08:38]
+:PROPERTIES:
+:ARCHIVE_TIME: 2019-11-07 Thu 08:38
+:ARCHIVE_FILE: ~/src/projects/dwarlixir-mistakes/index.org
+:ARCHIVE_OLPATH: feedback
+:ARCHIVE_CATEGORY: index
+:ARCHIVE_TODO: DONE
+:END:
+
+* DONE impact slide: link is broken
+CLOSED: [2019-11-07 Thu 08:46]
+:PROPERTIES:
+:ARCHIVE_TIME: 2019-11-07 Thu 08:46
+:ARCHIVE_FILE: ~/src/projects/dwarlixir-mistakes/index.org
+:ARCHIVE_OLPATH: feedback
+:ARCHIVE_CATEGORY: index
+:ARCHIVE_TODO: DONE
+:END:
+
+* CANCELED "Misconceptions about Elixir" "while writing a game"
+CLOSED: [2019-11-07 Thu 16:08]
+:PROPERTIES:
+:ARCHIVE_TIME: 2019-11-07 Thu 16:08
+:ARCHIVE_FILE: ~/src/projects/dwarlixir-mistakes/index.org
+:ARCHIVE_OLPATH: feedback
+:ARCHIVE_CATEGORY: index
+:ARCHIVE_TODO: CANCELED
+:END:
+
+* DONE change foldl to reduce
+CLOSED: [2019-11-07 Thu 16:08]
+:PROPERTIES:
+:ARCHIVE_TIME: 2019-11-07 Thu 16:09
+:ARCHIVE_FILE: ~/src/projects/dwarlixir-mistakes/index.org
+:ARCHIVE_OLPATH: feedback
+:ARCHIVE_CATEGORY: index
+:ARCHIVE_TODO: DONE
+:END:
+
+* DONE explain dining philosophers / show slide?
+CLOSED: [2019-11-07 Thu 16:28]
+:PROPERTIES:
+:ARCHIVE_TIME: 2019-11-07 Thu 16:28
+:ARCHIVE_FILE: ~/src/projects/dwarlixir-mistakes/index.org
+:ARCHIVE_OLPATH: feedback
+:ARCHIVE_CATEGORY: index
+:ARCHIVE_TODO: DONE
+:END:
+
+* DONE context around BOTH map and reduce
+CLOSED: [2019-11-07 Thu 16:43]
+:PROPERTIES:
+:ARCHIVE_TIME: 2019-11-07 Thu 16:43
+:ARCHIVE_FILE: ~/src/projects/dwarlixir-mistakes/index.org
+:ARCHIVE_OLPATH: feedback
+:ARCHIVE_CATEGORY: index
+:ARCHIVE_TODO: DONE
+:END:
+
+* DONE better deadlock / images from game? or at least using dwarves
+CLOSED: [2019-11-07 Thu 17:08]
+:PROPERTIES:
+:ARCHIVE_TIME: 2019-11-07 Thu 17:08
+:ARCHIVE_FILE: ~/src/projects/dwarlixir-mistakes/index.org
+:ARCHIVE_OLPATH: feedback
+:ARCHIVE_CATEGORY: index
+:ARCHIVE_TODO: DONE
+:END:
+
+* DONE flooding process: story slide is blank
+CLOSED: [2019-11-07 Thu 17:10]
+:PROPERTIES:
+:ARCHIVE_TIME: 2019-11-07 Thu 17:10
+:ARCHIVE_FILE: ~/src/projects/dwarlixir-mistakes/index.org
+:ARCHIVE_OLPATH: feedback
+:ARCHIVE_CATEGORY: index
+:ARCHIVE_TODO: DONE
+:END:
+
+* DONE cleaner difference between flooding a process and sending tons of messages
+CLOSED: [2019-11-07 Thu 17:26]
+:PROPERTIES:
+:ARCHIVE_TIME: 2019-11-07 Thu 17:26
+:ARCHIVE_FILE: ~/src/projects/dwarlixir-mistakes/index.org
+:ARCHIVE_OLPATH: feedback
+:ARCHIVE_CATEGORY: index
+:ARCHIVE_TODO: DONE
+:END:
+
+* DONE self-deprecation may be too much?
+CLOSED: [2019-11-07 Thu 17:27]
+:PROPERTIES:
+:ARCHIVE_TIME: 2019-11-07 Thu 17:27
+:ARCHIVE_FILE: ~/src/projects/dwarlixir-mistakes/index.org
+:ARCHIVE_OLPATH: feedback
+:ARCHIVE_CATEGORY: index
+:ARCHIVE_TODO: DONE
+:END:
+
+* DONE use "we" more?
+CLOSED: [2019-11-07 Thu 17:27]
+:PROPERTIES:
+:ARCHIVE_TIME: 2019-11-07 Thu 17:27
+:ARCHIVE_FILE: ~/src/projects/dwarlixir-mistakes/index.org
+:ARCHIVE_OLPATH: feedback
+:ARCHIVE_CATEGORY: index
+:ARCHIVE_TODO: DONE
+:END:
+
+* DONE hand over the reins?
+CLOSED: [2019-11-07 Thu 17:30]
+:PROPERTIES:
+:ARCHIVE_TIME: 2019-11-07 Thu 17:30
+:ARCHIVE_FILE: ~/src/projects/dwarlixir-mistakes/index.org
+:ARCHIVE_OLPATH: feedback
+:ARCHIVE_CATEGORY: index
+:ARCHIVE_TODO: DONE
+:END:

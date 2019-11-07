@@ -1,4 +1,4 @@
-#+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t reveal_title_slide:nil
+#+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t reveal_title_slide:nil reveal_global_footer:f
 #+REVEAL_HIGHLIGHT_CSS: solarized
 #+REVEAL_THEME: solarized
 #+REVEAL_ROOT: ./reveal.js-3.8.0
@@ -7,30 +7,24 @@
 ** everywhere: connect "fix" more clearly to the story
 ** double up on the roadmap, transition to lesson?
 *** misconception vs lesson
-** "Misconceptions about Elixir" "while writing a game"
 ** shorten intro / lose song lyrics? (or move to the end?)
 ** mud/df descriptions could be shorter?
 ** represent world generation more graphically
-** change foldl to reduce
-** context around BOTH map and reduce
-** better deadlock / images from game? or at least using dwarves
-** "tell don't ask" could use a diagram
-** explain dining philosophers / show slide?
-** flooding process: story slide is blank
-** cleaner difference between flooding a process and sending tons of messages
-** oom killer behavior -
+** "dining philosophers" could use a diagram
 ** add htop screenshots for memory usage
-** how did oom killer get diagnosed?
-** hand over the reins?
-** use "we" more?
-** self-deprecation may be too much?
-** impact slide: link is broken
 ** explain LSP?
 ** hey Jake, if you're out there..?
 
 * Dwarlixir
-A story of mistakes
+Mistakes were made
+* The Big Elixir 2019
+[Talks that present] *new ways of thinking* about distributed systems, and talk deeply about *lessons learned* [...].
 
+We want to hear about the budding innovations [...], even *the very strange*.
+
+#+begin_notes
+Perfect. I have just the thing.
+#+end_notes
 ** Who you're listening to
 Aldric Giacomoni
 
@@ -100,10 +94,6 @@ Text-based multiplayer game
 Read description
 
 Write commands
-
-Yes, text-based combat
-
-telnet / web
 #+end_notes
 
 ** What's Dwarf Fortress?
@@ -122,6 +112,18 @@ What could possibly go wrong?
 
 Let's find out!
 #+end_notes
+
+** Apparently obligatory
+
+Why?!
+
+WHY DID I DO THIS?
+
+#+begin_notes
+I thought it'd be good for laughs?
+
+Also, why /NOT/ ?
+#+end_notes
 * So what we're gonna aim for is…
 - A telnet connection for people
 - A world map
@@ -130,10 +132,17 @@ Let's find out!
 - Creatures that can die
 - Creatures that can reproduce
 - Balancing out the ecosystem
-** I am not a game designer
+** Disclaimer
+I am not a game designer.
+
 Nothing here constitutes *good* advice.
 
 Seriously.
+#+begin_notes
+There are many talks about good ideas.
+
+This is a talk about bad ones.
+#+end_notes
 ** Roadmap
 - [0/6]
   - [ ] algorithm improvement
@@ -148,7 +157,7 @@ dip toes: algorithm improvement
 
 too much state in processes
 
-even more too much state
+too much state in too many processes
 
 beam vm schedulers (erlang virtual machine)
 
@@ -170,6 +179,7 @@ World: Graph → Edges and nodes
 4. create bridges (single edges) between islands
 ** Key code
 #+begin_src elixir
+  def traverse(node, _, visited) when node in visited, do: visited
   def traverse(node, edge_list, visited) do
     visited = [node | visited]
     edges_from_node = direct_edges(node, edge_list)
@@ -182,6 +192,7 @@ World: Graph → Edges and nodes
 
 #+begin_notes
 flat_map is what we care about here
+
 We return nested lists!
 #+end_notes
 ** Impact
@@ -191,16 +202,26 @@ Lots of data being copied when flattening
 
 VERY SLOW
 ** Fix
-#+REVEAL_HTML: <img class="stretch" src="algorithm-diff.png">
-
-#+begin_notes
-Don't name your variables x and y unless they're cartesian coordinates
-
-x is a list of visited nodes
-
-y is a list of edges from this node
-#+end_notes
+#+begin_src elixir
+  def traverse(node, _, visited) when node in visited, do: visited
+  def traverse(node1, edge_list, visited) do
+    visited = [node1 | visited]
+    edges_from_node = direct_edges(node1, edge_list)
+    Enum.reduce(
+      edges_from_node,
+      visited,
+      fn({_a, b}, acc) -> traverse(b, edge_list, acc) end)
+  end
+#+end_src
 ** Roadmap
+- [1/6]
+  - [X] +algorithm improvement+
+  - [ ] extreme local state
+  - [ ] distributed state
+  - [ ] schedulers and the "tick"
+  - [ ] flooding processes
+  - [ ] linux oom killer
+** Lessons
 - [1/6]
   - [X] copying data structures is expensive
   - [ ] extreme local state
@@ -228,16 +249,48 @@ Alan Kay once said, "OOP to me means only messaging, local retention, and protec
 - So they send a synchronous message to other processes to check what the state is
 - But.. Other processes are all doing the same thing
 #+end_notes
-** Impact
+** Synchronous call
 A → B
 
-B → C
+B → A
 
-C → A
+A → ☺
+
+#+begin_notes
+Process A calls Process B
+
+Process A blocks until it has received a response
+
+A's message goes in B's mailbox, B eventually gets to it
+#+end_notes
+** Impact
+** My dwarves
+Alice asks Bob /(and waits)/
+
+Bob asks Charlie  /(and waits)/
+
+Charlie asks Alice  /(and waits)/
 
 Deadlocks
 #+begin_notes
-Think "Dining Philosophers" problem.
+
+#+end_notes
+** Dining philosophers
+
+The classic concurrency problem.
+
+Check it out.
+
+#+begin_notes
+Each philosopher must alternately think and eat.
+
+However, a philosopher can only eat spaghetti when they have both left and right forks.
+
+Each fork can be held by only one philosopher and so a philosopher can use the fork only if it is not being used by another philosopher.
+
+After an individual philosopher finishes eating, they need to put down both forks so that the forks become available to others.
+
+A philosopher can take the fork on their right or the one on their left as they become available, but cannot start eating before getting both forks.
 #+end_notes
 ** Fix
 Some state is global.
@@ -262,7 +315,7 @@ Highly recommended
 ** Roadmap
 - [2/6]
   - [X] copying data structures is expensive
-  - [X] tell, don't ask
+  - [X] shared state should be shared
   - [ ] distributed state
   - [ ] schedulers and the "tick"
   - [ ] flooding processes
@@ -316,21 +369,31 @@ would give this a more serious shot today if I had the time.
 ** Roadmap
 - [3/6]
   - [X] copying data structures is expensive
-  - [X] tell, don't ask
+  - [X] shared state should be shared
   - [X] prefer a single source of truth
   - [ ] schedulers and the "tick"
   - [ ] flooding processes
   - [ ] linux oom killer
 * Schedulers and the "tick"
-#+REVEAL_HTML: <img class="stretch" src="gameoflife.png">
-
 #+begin_notes
 "game of life"
 
 the "tick" is the unit of time: every time a tick happens, everything in the world happens
 #+end_notes
+** Game of Life
+#+REVEAL_HTML: <img class="stretch" src="gameoflife.png">
+
+#+begin_notes
+The short version:
+
+All the filled cells are "alive"
+
+Current board state is the input for the next board state
+
+Computation for new state happens on every tick
+#+end_notes
 ** Misconception
-There won't be a sizable impact to sending all my creatures a message at the same time
+There won't be a noticeable impact to sending all my creatures a message at the same time
 
 #+begin_notes
 when the heartbeat happens every process acts
@@ -378,7 +441,7 @@ I wanted events
 ** Roadmap
 - [4/6]
   - [X] copying data structures is expensive
-  - [X] tell, don't ask
+  - [X] shared state should be shared
   - [X] prefer a single source of truth
   - [X] know your system's CPU needs
   - [ ] flooding processes
@@ -443,7 +506,7 @@ And that took me to a complete overhaul of the system
 ** Roadmap
 - [5/6]
   - [X] copying data structures is expensive
-  - [X] tell, don't ask
+  - [X] shared state should be shared
   - [X] prefer a single source of truth
   - [X] know your system's CPU needs
   - [X] actors are single-threaded
@@ -457,21 +520,31 @@ remember when Ι said I would balance the ecosystem?
 ** Story
 "Emergent Behavior"
 #+begin_notes
-world simulation: reproduction and death
+Once I had fixed all the other problems, the system would be relatively stable
 
-balancing lifespan with likelihood of becoming pregnant and length of pregnancy is hard
+Or so I thought
+
+I'd launch the game, and after an hour and a half someone would say "Hey, your game is down"
 #+end_notes
 ** Impact
 The operating system does what it needs to do to stay up
 #+REVEAL_HTML: <img class="stretch" src="htop.png">
 #+begin_notes
-I'd launch the game, and after an hour and a half someone would say "Hey, your game is down"
-
 Linux has an out of memory killer
 
 kill non-essential OS-level processes using too much RAM
 
-We don't see this often because for the most part, the RAM that is "used" is actually free
+We don't see this often because for the most part, the RAM that is "used" is actually free (it's not released back to the operating system)
+
+I eventually figured it out because Ι launched the game and logged on to it, and on the server I launched top (in this screenshot, htop)
+
+To a large extent, this actually was an indication of success
+
+world simulation: reproduction and death
+
+balancing lifespan with likelihood of becoming pregnant and length of pregnancy is hard
+
+OOM killer docs: https://www.kernel.org/doc/gorman/html/understand/understand016.html
 #+end_notes
 ** Fix
 Ecosystem
@@ -487,7 +560,7 @@ prod systems are so much more predictable
 ** Roadmap
 - [6/6]
   - [X] copying data structures is expensive
-  - [X] tell, don't ask
+  - [X] shared state should be shared
   - [X] prefer a single source of truth
   - [X] know your system's CPU needs
   - [X] actors are single-threaded
