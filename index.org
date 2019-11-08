@@ -3,16 +3,12 @@
 #+REVEAL_THEME: solarized
 #+REVEAL_ROOT: ./reveal.js-3.8.0
 
-* feedback
-** everywhere: connect "fix" more clearly to the story
-** double up on the roadmap, transition to lesson?
-*** misconception vs lesson
 * Dwarlixir
 Mistakes were made
-* The Big Elixir 2019's theme
+** The Big Elixir 2019's theme
 [Talks that present] *new ways of thinking* [...] and talk deeply about *lessons learned* [...].
 
-We want to hear about *the very strange*.
+We want to hear about [...] *the very strange*.
 
 #+begin_notes
 My brain dropped pretty much everything except for these parts.
@@ -21,7 +17,7 @@ And I thought...
 
 Perfect. I have just the thing.
 #+end_notes
-** Who you're listening to
+*** Who you're listening to
 Aldric Giacomoni
 
 ~@trevoke~
@@ -38,7 +34,7 @@ Talk to me after the session!
 
 We are hiring; our stack is Ruby and Scala, there's no Elixir... Yet!
 #+end_notes
-** Why this talk? 1/2
+*** Why this talk? 1/2
 #+begin_quote
 You got to lose to know
 
@@ -59,7 +55,7 @@ How to win
 - In Radical Candor, Andy Grove says of Steve Jobs:
 "I didn't say Steve /is/ always right. I said he always /gets/ it right. Like anyone, he is wrong sometimes, but he insists, and not gently either, that people tell him when he's wrong, so he always gets it right in the end."
 #+end_notes
-** Why this talk? 2/2
+*** Why this talk? 2/2
 #+begin_quote
 With every mistake we must surely be learning
 
@@ -76,12 +72,14 @@ Still my guitar gently weeps
 - Made plenty of mistakes on the way
 - We learn well with stories
 #+end_notes
-** Apparently obligatory
+*** Apparently obligatory
 Why?!
 
 Why this side project?
 
 #+begin_notes
+Powell Kinney said this slide had to be there, so Ι added it.
+
 why /NOT/ ?
 
 This project has spawned so many good conversations
@@ -94,9 +92,9 @@ So many side projects
 
 Cherish your ideas! Who knows what their impact will be?
 #+end_notes
-* Establishing context
+** Establishing context
 A mix of a MUD and Dwarf Fortress
-** What's a MUD?
+*** What's a MUD?
 #+REVEAL_HTML: <img class="stretch" src="discworld.png">
 
 #+begin_notes
@@ -109,7 +107,7 @@ Read description
 Write commands
 #+end_notes
 
-** What's Dwarf Fortress?
+*** What's Dwarf Fortress?
 #+REVEAL_HTML: <img class="stretch" src="dwarf-fortress.png">
 
 #+begin_notes
@@ -126,7 +124,7 @@ What could possibly go wrong?
 Let's find out!
 #+end_notes
 
-* So what we're gonna aim for is…
+** So what we're gonna aim for is…
 - A telnet connection for people
 - A world map
 - With time passing
@@ -145,7 +143,7 @@ There are many talks about good ideas.
 
 This is a talk about bad ones.
 #+end_notes
-** Roadmap
+* Roadmap
 - [0/6]
   - [ ] algorithm improvement
   - [ ] extreme local state
@@ -170,10 +168,10 @@ AKA "what's the deal with immutability anyway?"
 ** Story
 World: Graph → Edges and nodes
 
-1. "nodes" are a list of numbers
+1. "nodes" are just ids
 2. generate one edge to a random node from each node
-3. collect, breadth-first, into islands
-4. create bridges (single edges) between islands
+3. collect, breadth-first, edges into islands
+4. create single edges between islands
 ** Key code
 #+begin_src elixir
   def traverse(node, _, visited) when node in visited, do: visited
@@ -210,17 +208,15 @@ VERY SLOW
       fn({_a, b}, acc) -> traverse(b, edge_list, acc) end)
   end
 #+end_src
+#+begin_notes
+Concatenating linked lists is significantly more performant than creating new ones all the time
+#+end_notes
+** Lessons
+#+ATTR_REVEAL: :frag appear
+1. copying data structures is expensive
 ** Roadmap
 - [1/6]
-  - [X] +algorithm improvement+
-  - [ ] extreme local state
-  - [ ] distributed state
-  - [ ] schedulers and the "tick"
-  - [ ] flooding processes
-  - [ ] linux oom killer
-** Lessons
-- [1/6]
-  - [X] copying data structures is expensive
+  - [X] algorithm improvement
   - [ ] extreme local state
   - [ ] distributed state
   - [ ] schedulers and the "tick"
@@ -231,7 +227,9 @@ VERY SLOW
 extreme local state has got to be better than global state
 
 #+begin_notes
-Alan Kay once said, "OOP to me means only messaging, local retention, and protection and hiding of state-process, and extreme late-binding of all things"
+Alan Kay once wrote, "OOP to me means only messaging, local retention, and protection and hiding of state-process, and extreme late-binding of all things"
+
+I thought.. What if.. I didn't use a database?
 #+end_notes
 ** Story
 "Actor model?" Moar like extreme object-oriented, amirite?
@@ -244,7 +242,6 @@ Alan Kay once said, "OOP to me means only messaging, local retention, and protec
 - Imagine the person can say "Nice hat" or "Nice Sunglasses"
 - But they have to /check/ first of course.
 - So they send a synchronous message to other processes to check what the state is
-- But.. Other processes are all doing the same thing
 #+end_notes
 ** Synchronous call
 A → B
@@ -261,19 +258,20 @@ Process A blocks until it has received a response
 A's message goes in B's mailbox, B eventually gets to it
 #+end_notes
 ** Impact
-** My dwarves
 Alice asks Bob /(and waits)/
 
 Bob asks Charlie  /(and waits)/
 
 Charlie asks Alice  /(and waits)/
 
-Deadlocks
 #+begin_notes
+- But.. Other processes are all doing the same thing!
 
+DEADLOCKS!
+
+Dun dun dunnn.
 #+end_notes
 ** Dining philosophers
-
 The classic concurrency problem.
 
 Check it out.
@@ -293,7 +291,6 @@ A philosopher can take the fork on their right or the one on their left as they 
 Some state is global.
 
 I know it's a boring answer.
-
 #+begin_notes
 choices for where the state goes
 
@@ -302,17 +299,20 @@ basically inject code in running application, Erlang provides hooks for upgradin
 
 But that's a whole other talk
 
-
 the big elixir last year
 
 Desmond Bowe gave a talk about "stateful servers"
 
 Highly recommended
 #+end_notes
+** Lessons
+#+ATTR_REVEAL: :frag (none appear)
+1. copying data structures is expensive
+2. shared state should be shared
 ** Roadmap
 - [2/6]
-  - [X] copying data structures is expensive
-  - [X] shared state should be shared
+  - [X] algorithm improvement
+  - [X] extreme local state
   - [ ] distributed state
   - [ ] schedulers and the "tick"
   - [ ] flooding processes
@@ -330,21 +330,28 @@ which synchronous calls, not how many
 - copy exits into dwarf state
 - copy loc id into dwarf state
 - copy basic dwarf info into location state
+
+The astute observer will notice I'm not even trying to solve the correct the previous problem
+
+... Because I had misdiagnosed (which is probably a whole other talk)
 #+end_notes
 ** Story
 Moar local state in moar local places
 #+begin_notes
 I'd love to say that I figured out "some state is global" when I ran into the deadlocks
 
-But that's just not true. Ι really wanted to not do databases.
+But that's just not true. Also, Ι really wanted to not do databases.
 
 So I started to copy some data into each process, because that allowed me to do fewer synchronous calls.
-
 #+end_notes
 ** Impact
 Accidentally multiple sources of truths
 #+begin_notes
-I created caches. Caches are very hard to invalidate. It's one of the two hardest problems in programming, along with naming and off-by-one errors.
+I created caches. Caches are very hard to invalidate.
+
+Eric mentioned this in his keynote this morning.
+
+It's one of the two hardest problems in programming, along with naming and off-by-one errors.
 
 two-phase commits; lock multiple processes to ensure synchronization
 #+end_notes
@@ -363,11 +370,16 @@ Means neither floor nor creature have to block because another process is starti
 
 would give this a more serious shot today if I had the time.
 #+end_notes
+** Lessons
+#+ATTR_REVEAL: :frag (none none appear)
+  1. copying data structures is expensive
+  2. shared state should be shared
+  3. prefer a single source of truth
 ** Roadmap
 - [3/6]
-  - [X] copying data structures is expensive
-  - [X] shared state should be shared
-  - [X] prefer a single source of truth
+  - [X] algorithm improvement
+  - [X] extreme local state
+  - [X] distributed state
   - [ ] schedulers and the "tick"
   - [ ] flooding processes
   - [ ] linux oom killer
@@ -435,12 +447,18 @@ really didn't want "everything to act at the same time"
 
 I wanted events
 #+end_notes
+** Lessons
+#+ATTR_REVEAL: :frag (none none none appear)
+  1. copying data structures is expensive
+  2. shared state should be shared
+  3. prefer a single source of truth
+  4. understand your system's CPU needs
 ** Roadmap
 - [4/6]
-  - [X] copying data structures is expensive
-  - [X] shared state should be shared
-  - [X] prefer a single source of truth
-  - [X] know your system's CPU needs
+  - [X] algorithm improvement
+  - [X] extreme local state
+  - [X] distributed state
+  - [X] schedulers and the "tick"
   - [ ] flooding processes
   - [ ] linux oom killer
 * flooding processes
@@ -500,13 +518,20 @@ realization: more of a single heartbeat
 
 And that took me to a complete overhaul of the system
 #+end_notes
+** Lessons
+#+ATTR_REVEAL: :frag (none none none none appear)
+  1. copying data structures is expensive
+  2. shared state should be shared
+  3. prefer a single source of truth
+  4. understand your system's CPU needs
+  5. actors are single-threaded
 ** Roadmap
 - [5/6]
   - [X] copying data structures is expensive
   - [X] shared state should be shared
   - [X] prefer a single source of truth
-  - [X] know your system's CPU needs
-  - [X] actors are single-threaded
+  - [X] understand your system's CPU needs
+  - [X] flooding processes
   - [ ] linux oom killer
 * linux OOM killer
 ** Misconception
@@ -552,14 +577,22 @@ If more than 20% RAM available, allow births
 
 prod systems are so much more predictable
 #+end_notes
+** Lessons
+#+ATTR_REVEAL: :frag (none none none none none appear)
+  1. copying data structures is expensive
+  2. shared state should be shared
+  3. prefer a single source of truth
+  4. understand your system's CPU needs
+  5. actors are single-threaded
+  6. understand your system's RAM needs
 ** Roadmap
 - [6/6]
   - [X] copying data structures is expensive
   - [X] shared state should be shared
   - [X] prefer a single source of truth
-  - [X] know your system's CPU needs
+  - [X] understand your system's CPU needs
   - [X] actors are single-threaded
-  - [X] know your system's RAM needs
+  - [X] understand your system's RAM needs
 * BONUS
 * Yak shaving
 It's yaks all the way down
@@ -638,8 +671,9 @@ We would love the opportunity to work with you on this community project
 Only took me about a year...
 #+end_notes
 * Resources
-- https://github.com/elixir-lsp
-- https://github.com/Trevoke/dwarlixir
+- [[https://github.com/Trevoke/dwarlixir][Dwarlixir on Github]]
+- [[https://github.com/elixir-lsp][Elixir LSP on Github]]
 - elixir-lang.slack.com → #language-server
-- Linux OOM killer: https://www.kernel.org/doc/gorman/html/understand/understand016.html
+- [[https://www.kernel.org/doc/gorman/html/understand/understand016.html][Linux OOM killer]]
+- [[http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en][Alan Kay on OOP]]
 * Q&A
