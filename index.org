@@ -172,7 +172,7 @@ World: Graph → Edges and nodes
 2. generate one edge to a random node from each node
 3. collect, breadth-first, edges into islands
 4. create single edges between islands
-** Key code
+*** Key code
 #+begin_src elixir
   def traverse(node, _, visited) when node in visited, do: visited
   def traverse(node, edge_list, visited) do
@@ -224,7 +224,7 @@ Concatenating linked lists is significantly more performant than creating new on
   - [ ] linux oom killer
 * Extreme local state
 ** Misconception
-extreme local state has got to be better than global state
+local state has got to be better than global state
 
 #+begin_notes
 Alan Kay once wrote, "OOP to me means only messaging, local retention, and protection and hiding of state-process, and extreme late-binding of all things"
@@ -235,15 +235,14 @@ I thought.. What if.. I didn't use a database?
 "Actor model?" Moar like extreme object-oriented, amirite?
 
 #+begin_notes
-- Creatures
-- GenServers
+- Creatures are GenServers
 - Local state: can have hat or sunglasses
 - "random action"
 - Imagine the person can say "Nice hat" or "Nice Sunglasses"
 - But they have to /check/ first of course.
 - So they send a synchronous message to other processes to check what the state is
 #+end_notes
-** Synchronous call
+*** Synchronous call
 A → B
 
 B → A
@@ -271,7 +270,7 @@ DEADLOCKS!
 
 Dun dun dunnn.
 #+end_notes
-** Dining philosophers
+*** Dining philosophers
 The classic concurrency problem.
 
 Check it out.
@@ -288,27 +287,16 @@ After an individual philosopher finishes eating, they need to put down both fork
 A philosopher can take the fork on their right or the one on their left as they become available, but cannot start eating before getting both forks.
 #+end_notes
 ** Fix
-Some state is global.
-
-I know it's a boring answer.
+Tell, don't ask.
 #+begin_notes
-choices for where the state goes
+Essentially, don't ask for information, just say what you want to have happen.
 
-hot deploys
-basically inject code in running application, Erlang provides hooks for upgrading state
-
-But that's a whole other talk
-
-the big elixir last year
-
-Desmond Bowe gave a talk about "stateful servers"
-
-Highly recommended
+This is a paradigm shift, and it causes fundamental architectural changes.
 #+end_notes
 ** Lessons
 #+ATTR_REVEAL: :frag (none appear)
 1. copying data structures is expensive
-2. shared state should be shared
+2. tell, don't ask
 ** Roadmap
 - [2/6]
   - [X] algorithm improvement
@@ -319,30 +307,37 @@ Highly recommended
   - [ ] linux oom killer
 * Distributed state
 #+begin_notes
-wish Ι could say I figured out the "global state"
+I'd love to say that I figured out "some state is global" when I ran into the deadlocks
+
+But Ι really wanted to not do databases. It's unclear whether I'm too stubborn or not smart enough.
+
+Or both.
 #+end_notes
 ** Misconception
 Fewer synchronous calls will reduce the opportunity of deadlocks
 #+begin_notes
-which synchronous calls, not how many
+real problem is which synchronous calls, not how many
 
-- dwarf went to new location
-- copy exits into dwarf state
-- copy loc id into dwarf state
-- copy basic dwarf info into location state
+In this story, I'm not even trying to solve the correct problem from the previous story
 
-The astute observer will notice I'm not even trying to solve the correct the previous problem
+... Because I had misdiagnosed (which is a whole other talk)
 
-... Because I had misdiagnosed (which is probably a whole other talk)
+I'm playing the race condition game
 #+end_notes
 ** Story
 Moar local state in moar local places
 #+begin_notes
-I'd love to say that I figured out "some state is global" when I ran into the deadlocks
+Instead of "each process has its own state and they'll be queried for state" ...
+#+end_notes
+*** Spaghetti state
+- Dwarf has location exits, location id
+- locations have dwarf info
+#+begin_notes
+I started to copy some data into each process, because that allowed me to do fewer synchronous calls.
 
-But that's just not true. Also, Ι really wanted to not do databases.
+There's a consequence here, right?
 
-So I started to copy some data into each process, because that allowed me to do fewer synchronous calls.
+Every time a dwarf moves, a lot of state has to be updated
 #+end_notes
 ** Impact
 Accidentally multiple sources of truths
@@ -352,28 +347,28 @@ I created caches. Caches are very hard to invalidate.
 Eric mentioned this in his keynote this morning.
 
 It's one of the two hardest problems in programming, along with naming and off-by-one errors.
-
-two-phase commits; lock multiple processes to ensure synchronization
 #+end_notes
 ** Fix
-Some state is global. Use a database.
-
-OR! Go look at erlmud
-
-"separate process" that handles state shifting
+Some state is global
 #+begin_notes
-like picking up something off the floor
+But there's a deep truth here
 
-create a Hand process
+choices for where the state goes
 
-Means neither floor nor creature have to block because another process is starting the synchronous calls
+hot deploys: basically inject code in running application, Erlang provides hooks for upgrading state
 
-would give this a more serious shot today if I had the time.
+But that's a whole other talk
+
+the big elixir last year
+
+Desmond Bowe gave a talk about "stateful servers"
+
+Highly recommended
 #+end_notes
 ** Lessons
 #+ATTR_REVEAL: :frag (none none appear)
   1. copying data structures is expensive
-  2. shared state should be shared
+  2. tell, don't ask
   3. prefer a single source of truth
 ** Roadmap
 - [3/6]
@@ -429,7 +424,7 @@ This means it coordinates the processes' actions, and that means it helps alloca
 
 for a game - heartbeat every 1-6 seconds
 
-So this was an incredibly regular cadence of CPU usage, but that also meant there was a clear upper bound to growth: at some point, CPUs wouldn't be able to allow every process to make their move at the same time.
+So this was an incredibly regular cadence of CPU usage, and that also meant there was a clear upper bound to growth: at some point, CPUs wouldn't be able to allow every process to make their move at the same time.
 #+end_notes
 ** Fix
 More or less "any other way"
@@ -439,18 +434,19 @@ I opted for "all manage their own ticks"
 Never mind how untestable that makes the system
 
 Smarter fix is probably "bounded global ticks" so that some control can be exerted more easily
-
 #+begin_notes
+Eric vaguely pointed at something similar in his keynote
+
 if you have a couple of rooms - control those with its own heartbeat manager
 
 really didn't want "everything to act at the same time"
 
-I wanted events
+I wanted events - this is Elixir, damnit!
 #+end_notes
 ** Lessons
 #+ATTR_REVEAL: :frag (none none none appear)
   1. copying data structures is expensive
-  2. shared state should be shared
+  2. tell, don't ask
   3. prefer a single source of truth
   4. understand your system's CPU needs
 ** Roadmap
@@ -465,23 +461,23 @@ I wanted events
 ** Misconception
 It's hard to send a single process too many messages
 ** Story
-O(N²) is bad
+Every action is an event
+
+Dwarlixir is decentralized
 #+begin_notes
-- everything had its flow
-- "events" would rule
-- "events" were chaotic
+Apparently Eric had some version of this problem too
+
 - every time something would happen in the "room" process
 - an event would go to every living creature in the room so they could respond to it
 - and players would have this event transformed to text
-- again - every action goes to every creature. that's N^2.
+- again - every action in a room goes to every creature. that's N^2.
 - N^2 is bad.
+- with all the births, N was always increasing
 #+end_notes
 ** Impact
-The locations crashed
-
-The mobs crashed
-
-The process that printed stuff to the console crashed
+- The locations crashed
+- The mobs crashed
+- The process that printed stuff to the console crashed
 #+begin_notes
 
 What did it have to do?
@@ -508,29 +504,36 @@ Processes are "single-threaded", process messages one at a time
 
 Possibly constructing strings instead of IO strings made things worse
 
+So this means the printer process had an ever-increasing mailbox
 #+end_notes
 ** Fix
-Batch messages
+1. Cry
+2. Batch messages
+3. Research game design patterns
 #+begin_notes
-realization: more of a single heartbeat
+realization: current implementation needed more of a single heartbeat
+
+Bad for user experience: non-live messages, can't respond reasonably
 
 ... Took me to Entity Component System - game design pattern
 
 And that took me to a complete overhaul of the system
+
+And that's a whole other talk about macros (might piggyback on top of Bruce's talk from yesterday and give this talk next year)
 #+end_notes
 ** Lessons
 #+ATTR_REVEAL: :frag (none none none none appear)
   1. copying data structures is expensive
-  2. shared state should be shared
+  2. tell, don't ask
   3. prefer a single source of truth
   4. understand your system's CPU needs
   5. actors are single-threaded
 ** Roadmap
 - [5/6]
-  - [X] copying data structures is expensive
-  - [X] shared state should be shared
-  - [X] prefer a single source of truth
-  - [X] understand your system's CPU needs
+  - [X] algorithm improvement
+  - [X] extreme local state
+  - [X] distributed state
+  - [X] schedulers and the "tick"
   - [X] flooding processes
   - [ ] linux oom killer
 * linux OOM killer
@@ -558,13 +561,13 @@ kill non-essential OS-level processes using too much RAM
 
 We don't see this often because for the most part, the RAM that is "used" is actually free (it's not released back to the operating system)
 
-I eventually figured it out because Ι launched the game and logged on to it, and on the server I launched top (in this screenshot, htop)
+I eventually figured it out because Ι launched the game and logged on to it, and on the server I launched htop
 
 To a large extent, this actually was an indication of success
 
 world simulation: reproduction and death
 
-balancing lifespan with likelihood of becoming pregnant and length of pregnancy is hard
+balancing lifespan with reproductive maturity, likelihood of becoming pregnant, and length of pregnancy is hard
 #+end_notes
 ** Fix
 Ecosystem
@@ -580,19 +583,19 @@ prod systems are so much more predictable
 ** Lessons
 #+ATTR_REVEAL: :frag (none none none none none appear)
   1. copying data structures is expensive
-  2. shared state should be shared
+  2. tell, don't ask
   3. prefer a single source of truth
   4. understand your system's CPU needs
   5. actors are single-threaded
   6. understand your system's RAM needs
 ** Roadmap
 - [6/6]
-  - [X] copying data structures is expensive
-  - [X] shared state should be shared
-  - [X] prefer a single source of truth
-  - [X] understand your system's CPU needs
-  - [X] actors are single-threaded
-  - [X] understand your system's RAM needs
+  - [X] algorithm improvement
+  - [X] extreme local state
+  - [X] distributed state
+  - [X] schedulers and the "tick"
+  - [X] flooding processes
+  - [X] linux oom killer
 * BONUS
 * Yak shaving
 It's yaks all the way down
@@ -676,4 +679,7 @@ Only took me about a year...
 - elixir-lang.slack.com → #language-server
 - [[https://www.kernel.org/doc/gorman/html/understand/understand016.html][Linux OOM killer]]
 - [[http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en][Alan Kay on OOP]]
+- [[http://zxq9.com/erlmud/][ErlMud]]
+- [[https://github.com/Trevoke/ecstatic][Ecstatic on Github]]
 * Q&A
+If I don't know the answer, I'll make up a good one
