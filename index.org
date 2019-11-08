@@ -7,22 +7,18 @@
 ** everywhere: connect "fix" more clearly to the story
 ** double up on the roadmap, transition to lesson?
 *** misconception vs lesson
-** shorten intro / lose song lyrics? (or move to the end?)
-** mud/df descriptions could be shorter?
-** represent world generation more graphically
-** "dining philosophers" could use a diagram
-** add htop screenshots for memory usage
-** explain LSP?
-** hey Jake, if you're out there..?
-
 * Dwarlixir
 Mistakes were made
-* The Big Elixir 2019
-[Talks that present] *new ways of thinking* about distributed systems, and talk deeply about *lessons learned* [...].
+* The Big Elixir 2019's theme
+[Talks that present] *new ways of thinking* [...] and talk deeply about *lessons learned* [...].
 
-We want to hear about the budding innovations [...], even *the very strange*.
+We want to hear about *the very strange*.
 
 #+begin_notes
+My brain dropped pretty much everything except for these parts.
+
+And I thought...
+
 Perfect. I have just the thing.
 #+end_notes
 ** Who you're listening to
@@ -36,12 +32,14 @@ Director of Engineering at Stash
 
 Wrote code for about a decade
 
-<3 extreme programming, lean, agile...
-#+end_notes
-** Why this talk?
-#+begin_quote
-I know it's everybody's sin
+<3 extreme programming, lean, agile
 
+Talk to me after the session!
+
+We are hiring; our stack is Ruby and Scala, there's no Elixir... Yet!
+#+end_notes
+** Why this talk? 1/2
+#+begin_quote
 You got to lose to know
 
 How to win
@@ -61,25 +59,40 @@ How to win
 - In Radical Candor, Andy Grove says of Steve Jobs:
 "I didn't say Steve /is/ always right. I said he always /gets/ it right. Like anyone, he is wrong sometimes, but he insists, and not gently either, that people tell him when he's wrong, so he always gets it right in the end."
 #+end_notes
-** Why this talk?
+** Why this talk? 2/2
 #+begin_quote
-I look at the world and I notice it's turning
-
-While my guitar gently weeps
-
 With every mistake we must surely be learning
 
 Still my guitar gently weeps
 
-― The Beatles, While My Guitar Gently Weeps
+― While My Guitar Gently Weeps, The Beatles
 #+end_quote
 
 #+begin_notes
 - reason 2:
 - impostor syndrome is a thing
-- I've got this fancy title now, but that's just the tip of the iceberg
-- Made plenty of mistakes
+- manifests differently for everyone
+- I've got this fancy title now
+- Made plenty of mistakes on the way
 - We learn well with stories
+#+end_notes
+** Apparently obligatory
+Why?!
+
+Why this side project?
+
+#+begin_notes
+why /NOT/ ?
+
+This project has spawned so many good conversations
+
+So many lessons
+
+So many side projects
+
+... Even a small open source community
+
+Cherish your ideas! Who knows what their impact will be?
 #+end_notes
 * Establishing context
 A mix of a MUD and Dwarf Fortress
@@ -113,17 +126,6 @@ What could possibly go wrong?
 Let's find out!
 #+end_notes
 
-** Apparently obligatory
-
-Why?!
-
-WHY DID I DO THIS?
-
-#+begin_notes
-I thought it'd be good for laughs?
-
-Also, why /NOT/ ?
-#+end_notes
 * So what we're gonna aim for is…
 - A telnet connection for people
 - A world map
@@ -153,17 +155,12 @@ This is a talk about bad ones.
   - [ ] linux oom killer
 
 #+begin_notes
-dip toes: algorithm improvement
-
-too much state in processes
-
-too much state in too many processes
-
-beam vm schedulers (erlang virtual machine)
-
-sending too many messages to processes
-
-linux protects itself
+- dip toes: algorithm improvement
+- wrong kind of state in processes
+- too much state in too many processes
+- beam vm schedulers (erlang virtual machine)
+- sending too many messages to processes
+- linux protects itself
 #+end_notes
 * Algorithm improvement
 ** Misconception
@@ -543,8 +540,6 @@ To a large extent, this actually was an indication of success
 world simulation: reproduction and death
 
 balancing lifespan with likelihood of becoming pregnant and length of pregnancy is hard
-
-OOM killer docs: https://www.kernel.org/doc/gorman/html/understand/understand016.html
 #+end_notes
 ** Fix
 Ecosystem
@@ -568,15 +563,22 @@ prod systems are so much more predictable
 * BONUS
 * Yak shaving
 It's yaks all the way down
-** Editors matter
-LSP is the new hotness
+** Language Server Protocol
+One server
+
+One plugin per text editor
 
 #+begin_notes
-Microsoft Language Server Protocol
+Thanks Microsoft!
 
-What makes VSCode rock with Javascript
+Code completion, jump to definition, display documentation, etc.
+
+This is what makes VSCode rock with Javascript
 #+end_notes
-** Alchemist.el
+** Editors matter
+I use emacs
+
+primary plugin: alchemist.el
 #+begin_notes
 All-encompassing tool for emacs
 
@@ -591,42 +593,53 @@ Eventually just started a separate project only with LSP
 - Jake Becker's ~elixir-ls~
 
 #+begin_notes
-
 elixir_sense is project analysis
 
-elixir-ls is an editor-independent LS client
+elixir-ls is an editor-independent LS server
 
 Both seemed "abandoned" - couldn't reach the authors
 #+end_notes
 ** Created an org on Github
 https://github.com/elixir-lsp
-
 forked the projects, opened issues on original projects to explain why
 ** Created channel on Elixir Slack
 elixir-lang.slack.com
 
 #language-server
 ** Recruited folks
+- @jason_axelson
+- @asummers
+#+begin_notes
+Jason is the most active
+#+end_notes
 ** Eventually the author of elixir_sense joined
 Woot!
 ** Community is active
 WOOT!
+#+begin_notes
+Join us!
+#+end_notes
 ** Last open loop
 Still haven't established communication with Jake Becker
 
-Please join us, Jake! We're so thankful for all the work you've done!
+#+begin_notes
+Hey Jake, if you're out there... Please reach out!
+
+We would love the opportunity to work with you on this community project
+#+end_notes
+** Yaks
+- Dwarlixir
+- ECStatic
+- alchemist.el
+- elixir-ls
+- an actual community
 
 #+begin_notes
-Very sad about this
+Only took me about a year...
 #+end_notes
-** And that's the story
-#+begin_quote
-All about how
-
-My life got flipped turned upside down
-
-And I'd like to take a minute just sit right there
-
-Tell you how I yak-shaved my way to a community of maintainers
-#+end_quote
+* Resources
+- https://github.com/elixir-lsp
+- https://github.com/Trevoke/dwarlixir
+- elixir-lang.slack.com → #language-server
+- Linux OOM killer: https://www.kernel.org/doc/gorman/html/understand/understand016.html
 * Q&A
